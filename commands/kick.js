@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```You must have a reason to kick a user```')  
   
-    if(!message.author.id === process.env.RALID || message.author.id !== process.env.FREAKID || !message.member.hasPermission("KICK_MEMBERS")) return message.channel.send
+    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send
        (errEmbed).then
          (message.delete()).then
            (msg => msg.delete(5000));

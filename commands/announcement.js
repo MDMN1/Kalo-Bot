@@ -19,7 +19,10 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```There was not a #announcements channel.\nI created one for you. redo your announcement```')  
   
-      if(!message.author.id === process.env.RALID || message.author.id !== process.env.FREAKID || !message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errEmbed).then (message.delete()).then (msg => msg.delete(5000));
+      if  (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
+            (errEmbed).then
+              (message.delete()).then
+                (msg => msg.delete(5000));
   
      if(!AnnouncementChannel) {
         try { AnnouncementChannel = message.guild.createChannel('announcements')

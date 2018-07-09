@@ -1,3 +1,6 @@
+
+
+
 const mappings = (function (object) {
     let output = [];
 
@@ -45,17 +48,18 @@ module.exports.run = (client, message, args) => {
 
     let output = args.join(' ');
     mappings.forEach(replacer => output = output.replace(replacer.regex, replacer.replacement));
-
+    
+  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)
     message.channel.send(output);
   message.delete()
 };
 
 exports.conf = {
-aliases: ['tnytxt']
+aliases: ['say', 'speak']
 };
 
 exports.help = {
-name: 'tinytxt',
-description: 'Make text tiny', 
-usage: `${process.env.PREFIX}tinytxt <text> `
+name: 'say',
+description: 'Say Command for Ralston & Freak', 
+usage: `${process.env.PREFIX}say <text> `
 };

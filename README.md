@@ -1,5 +1,5 @@
-Welcome to the kalopsia bot
-=============================
+Welcome to Kalo-Bot
+===================
 
 **Hope you enjoy coding**
 

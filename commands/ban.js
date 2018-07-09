@@ -31,31 +31,31 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```You must have a reason to ban a user```')  
   
-       if(!message.author.id === process.env.RALID || message.author.id !== process.env.FREAKID || !message.member.hasPermission("BAN_MEMBERS")) return message.channel.send
-        (errEmbed).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
+    if  (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send
+          (errEmbed).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
     
-    if(!modlog) return message.channel.send
-        (errEmbed2).then
-          (message.delete()).then (msg => msg.delete(5000));  
+    if  (!modlog) return message.channel.send
+          (errEmbed2).then
+            (message.delete()).then (msg => msg.delete(5000));  
   
-    if(!user) return message.channel.send
-        (errEmbed3).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
+    if  (!user) return message.channel.send
+          (errEmbed3).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
 
-    if(user.highestRole >= message.author.highestRole) return message.channel.send
-        (errEmbed4).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
+    if  (user.highestRole >= message.author.highestRole) return message.channel.send
+          (errEmbed4).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
     
-    if(reason.length < 3) return message.channel.send
-        (errEmbed5).then
-          (message.delete()).then
-            (msg => msg.delete(5000)).then
-              user.send(`You have been **BANNED** from **${message.guild.name}** for '*${reason}* '`).then
-                message.guild.ban(user);
+    if  (reason.length < 3) return message.channel.send
+          (errEmbed5).then
+            (message.delete()).then
+              (msg => msg.delete(5000)).then
+                user.send(`You have been **BANNED** from **${message.guild.name}** for '*${reason}* '`).then
+                  message.guild.ban(user);
       
     const embed = new Discord.RichEmbed()
       .setThumbnail(message.author.displayAvatarURL)

@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args) => {
           .setDescription('```Mentioned User already has that role```') 
   
   
-      if(!message.author.id === process.env.RAL || message.author.id !== process.env.FREAK || !message.member.hasPermission("MANAGE_ROLES"))return message.channel.send
+      if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
           (errEmbed).then
             (message.delete()).then
               (msg => msg.delete(5000));

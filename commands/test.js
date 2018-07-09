@@ -1,13 +1,14 @@
 const Discord = require(`discord.js`);
+const db = require ('quick.db')
   module.exports.run = async (client, message, args, con) => {
-    if(message.author.id == process.env.RALID || message.author.id == process.env.FREAKID)
-        message.channel.send('Test command for testing things')
-          console.log('testing command for testing things')
+    if(message.author.id === process.env.RALID || message.author.id === process.env.FREAKID)
+        // message.channel.send('Test command for testing things')
+        //   console.log('testing command for testing things')
 //comment above code out if adding code to test
   
   
   
-  
+      db.set(`serverSettings_${message.guild.id}`, { aasda: "sdaSd" });
   
   
   

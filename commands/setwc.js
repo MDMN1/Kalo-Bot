@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args) => {
           (message.delete()).then
             (msg => msg.delete(5000));
   
-  db.set(`serverSettings_${message.guild.id}`, { welcomeChannel: args.join(" ").slice(2).replace('>', '')} );
+  db.set(`serverSettings_${message.guild.id}`, { welcomeChannel: args.join(" ").slice(2).replace('>', ''), leaveChannel: false} );
   db.fetch(`serverSettings_${message.guild.id}`, { target: "welcomeChannel" }).then(s => console.log(s))
   
   await message.channel.send

@@ -54,7 +54,8 @@ module.exports.run = async (client, message, args) => {
 
 		if  (!role || !message.guild.member(user).roles.has(role.id)) return message.channel.send
           (`${user} is not muted`);
-
+  
+  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)
 		await message.guild.member(user).removeRole(role);
 		const embed = new Discord.RichEmbed()
             .setThumbnail(message.author.displayAvatarURL)

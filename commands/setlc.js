@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Success`')
         .setDescription('```Leave Channel has been successfully changed```')
  
-  if(!message.member.hasPermission("MANAGE_CHANNELS")) return  message.channel.send
+  if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send
         (errEmbed).then
           (message.delete()).then
             (msg => msg.delete(5000));
@@ -39,14 +39,14 @@ module.exports.run = async (client, message, args) => {
             (msg => msg.delete(5000))
     return;
   };
+//
 
-  
 exports.conf = {
-aliases: ['setwc', 'setwelcomechannel']
+aliases: ['setlc', 'setleavechannel']
 };
 
 exports.help = {
-name: 'setwc',
-description: 'Set the welcome channel!', 
-usage: `${process.env.PREFIX}wc <channel name> `
+name: 'setlc',
+description: 'Set the leave channel!', 
+usage: `${process.env.PREFIX}lc <channel name> `
 };

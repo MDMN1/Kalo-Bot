@@ -29,13 +29,19 @@ fs.readdir("./events/", (err, files) => {
 });
 
 client.on('message', async message => { 
+  
+
+  
     const serverQueue = queue.get(message.guild.id);
   // log.send(`***${message.createdAt}*** **»** __**${message.guild}**__ (*#${message.channel.name}*) **»** **Message** | ***${message.author.tag}:*** ${message.content}`);
+  
+  //Website Filter code below
   // if(message.content.includes('www') ||message.content.includes('http') ||message.content.includes('https')) return message.channel.bulkDelete(1) && message.author.send(`Please do not post links in the server, That is what DM's are for...\n Thanks ❤`);
   if(message.author.bot) return;
   if (message.channel.type === 'dm') return message.reply('Who are you!\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t**STRANGER DANGER!**'); //xD
  
   if(!message.content.startsWith(process.env.PREFIX)) return; 
+
   
 	let args = message.content.slice(process.env.PREFIX.length).trim().split(' ');
 	let command = args.shift().toLowerCase();

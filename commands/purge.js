@@ -15,9 +15,11 @@ const Discord = module.require("discord.js");
   const errEmbed3 = new Discord.RichEmbed()
     .setColor('#ed455a')
       .setTitle('`Error`')
-        .setDescription('```You Can\`t Delete More than 100 Messages at a time```')  
-    
-   if(!message.author.id === process.env.RALID || message.author.id !== process.env.FREAKID || !message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
+        .setDescription('```You Can\`t Delete More than 100 Messages at a time```')
+  
+  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)
+   
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
       (errEmbed).then
         (message.delete()).then
           (msg => msg.delete(5000));
@@ -37,6 +39,7 @@ const Discord = module.require("discord.js");
             message.channel.send(embed)
 
     let fetched = await message.channel.fetchMessages({limit: args[0]})
+        
       message.channel.bulkDelete(fetched).then (msg => {
 
     const embed2 = new Discord.RichEmbed()

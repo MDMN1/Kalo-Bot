@@ -4,7 +4,7 @@ exports.run = async (client, member) => {
 
   let role =  member.guild.roles.find('name', 'Member');
   let nameg = await db.fetch(`serverSettings_${member.guild.id}`, { target: ".welcomeChannel" });
-  let welcomeChannel = member.guild.channel.get(nameg);
+  let welcomeChannel = member.guild.channels.get(nameg);
 
   const { Canvas } = require ('canvas-constructor');
   const { Attachment } = require('discord.js');
