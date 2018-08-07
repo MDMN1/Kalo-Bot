@@ -5,7 +5,7 @@ const Discord = require("discord.js");
     const embed = new Discord.RichEmbed()
       .setTitle('__Kalo Store__')
       .setColor('#14bdf5')
-      .setDescription('https://kalomc.craftingstore.net/')
+      .setDescription(`[Kalo-MC Store](https://kalomc.craftingstore.net/)`)
     message.channel.send(embed)
     message.delete(5000);    
   };

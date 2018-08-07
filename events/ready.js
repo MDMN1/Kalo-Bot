@@ -3,9 +3,10 @@ const fs = require('fs')
 
 exports.run = (client) => {
 
- 
+//   play.kalo-mc.com » ${process.env.PREFIX}help
+  // Under Maitenence
   client.user.setPresence(
-  { status: 'online', game: { name: `play.KalopsiaMC.com » ${process.env.PREFIX}help`, type: 'STREAMING', url: 'https://www.twitch.tv/twitch'} });
+  { status: 'online', game: { name: `play.kalo-mc.com » ${process.env.PREFIX}help`, type: 'STREAMING', url: 'https://www.twitch.tv/twitch'} });
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();

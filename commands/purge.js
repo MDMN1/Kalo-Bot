@@ -16,8 +16,6 @@ const Discord = module.require("discord.js");
     .setColor('#ed455a')
       .setTitle('`Error`')
         .setDescription('```You Can\`t Delete More than 100 Messages at a time```')
-  
-  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)
    
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
       (errEmbed).then

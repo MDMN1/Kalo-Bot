@@ -5,7 +5,8 @@ const Discord = require("discord.js");
     const embed = new Discord.RichEmbed()
       .setTitle('__Server IP__')
       .setColor('#14bdf5')
-      .setDescription('play.KalopsiaMC.com')
+      .addField('__Port #\'s__', `Towny:**25602**\nSkyBlock:**25600**`)
+      .setDescription('play.kalo-mc.com: **Port #**')
     message.channel.send(embed)
     message.delete(5000);    
   };

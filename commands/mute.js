@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args) => {
         .setDescription('```You must have a reason to mute this user```') 
   
   
-     if(!message.author.id === process.env.RALID || message.author.id !== process.env.FREAKID || !message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
+     if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
         (errEmbed).then
           (message.delete()).then
             (msg => msg.delete(5000));

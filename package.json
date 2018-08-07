@@ -12,10 +12,10 @@
   "dependencies": {
     "express": "^4.16.3",
     "discord.js": "^11.3.2",
-    "quick.db": "^6.3.1",
+    "quick.db": "^6.3.2",
     "node-opus": "^0.3.0",
     "ffmpeg-binaries": "^3.2.2",
-    "ytdl-core": "^0.20.4",
+    "ytdl-core": "^0.21.1",
     "quick.log-discord": "^1.1.0",
     "ms": "^2.1.1",
     "moment": "^2.22.2",

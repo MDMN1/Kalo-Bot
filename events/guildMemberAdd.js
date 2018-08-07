@@ -1,9 +1,11 @@
 const db = require ('quick.db')
 
 exports.run = async (client, member) => {
-
+//ye its not storing into the json file @here
   let role =  member.guild.roles.find('name', 'Member');
-  let nameg = await db.fetch(`serverSettings_${member.guild.id}`, { target: ".welcomeChannel" });
+  //fix for now
+  // let welcomeChannel = member.guild.channels.find('name', 'welcome');
+  let nameg = await db.fetch(`serverSettings_${member.guild.id}`, { target:"welcomeChannel"});
   let welcomeChannel = member.guild.channels.get(nameg);
 
   const { Canvas } = require ('canvas-constructor');
@@ -18,18 +20,18 @@ exports.run = async (client, member) => {
   const {body:avatar} = await get(member.user.displayAvatarURL);
   const image = new Canvas(1000, 300)
   
-    .addImage(body, 0, 0, 1000, 300)
+    .addImage(body, 0, 0, 1000, 300) //yo i know wut all the numbers stand for now, ( vs code) >?
       .setTextFont('30px Arial')
         .setColor('#FFFFFF')
-          .addText(name, 650, 280)//Horizontal, Vertical
+          .addText(name, 650, 280)//x, y, maxWidth
           .setTextAlign('center')
-        .addRoundImage(avatar, 685,40,182,182,92)    //(Horizontal),(Vertical),( Squashiness??!?!?  ),(Size || Stretch)
+        .addRoundImage(avatar, 685,40,182,182,92)    //x, y, width, height, radius
       .restore()
     .toBuffer();
 //Autorole after 5min
           setTimeout(function(){
-           // member.addRole(role).then(
-             welcomeChannel.send(new Attachment(image, 'welcome.png'))//) 
+           // member.addRole(role).then(      DB code is the issue. Rest works fine
+             welcomeChannel.send(new Attachment(Buffer.from(image), 'welcome.png'))//) 
              
 //      const serverStatus = {
 //     guildID: '343987204147642380',
@@ -41,7 +43,7 @@ exports.run = async (client, member) => {
 //     client.channels.get(serverStatus.totalUsersID).setName(`Total Users : ${member.guild.memberCount} `);
 //     client.channels.get(serverStatus.memberCountID).setName(`Member Count : ${member.guild.members.filter(m => !m.user.bot).size}`);
 //     client.channels.get(serverStatus.botCountID).setName(`Bot Count : ${member.guild.members.filter(m => m.user.bot).size}`);
-      }, 5000
+      }, 5000  //5sec for testing
   )}
 
 //1min = 60000

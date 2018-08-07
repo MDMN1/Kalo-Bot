@@ -51,3 +51,52 @@ module.exports.run = (client, message, args) => {
       description: '$@#! (ノಠ益ಠ)ノ 彡 ┻━┻', 
       usage: ' Im sorry... ┬──┬ ノ( ゜-゜ノ)'
     }
+
+
+/*
+module.exports.run = (bot, msg, args) => {
+const d = require ('discord.js')
+
+if (msg.author.id !== '224605839938289667') return;
+
+    const clean = text => {
+        if (typeof(text) === "string") 
+        
+        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        else
+            return text;
+      }
+
+      try {
+        const code = args.join(" ");
+        let evaled = eval(code);
+  
+        // if (typeof evaled !== "string")
+        //   evaled = require("util").inspect(evaled);
+  
+const embed = new d.MessageEmbed()
+.setTitle("Evaled")
+.addField('**Input**', "\`\`\`js" + "\n" + code + "\`\`\`", true)
+.addField('**Output**', "\`\`\`" + clean(evaled) + "\`\`\`")
+.addField('**TypeOf**', "\`\`\`" + typeof(evaled) + "\`\`\`", true)
+.setColor(0x7ec0ee)
+msg.channel.send({embed, code: "js"})
+      } catch (err) {
+        msg.channel.send({embed: { description: "__**An error -.-**__\n" + "\`\`\`" + clean(err) + "\`\`\`", color: 0xFF000}});
+      }
+
+
+
+}
+
+exports.help = {
+    name: "eval",
+    description: "Eval a certain piece of code!",
+    usage: "|eval <code>"
+}
+
+exports.conf = {
+    aliases: ['ev']
+}
+
+*/ //my eval if ye want it

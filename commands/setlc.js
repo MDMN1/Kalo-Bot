@@ -30,8 +30,8 @@ module.exports.run = async (client, message, args) => {
           (message.delete()).then
             (msg => msg.delete(5000));
   
-  db.set(`serverSettings_${message.guild.id}`, { leaveChannel: args.join(" ").slice(2).replace('>', '')} );
-  db.fetch(`serverSettings_${message.guild.id}`, { target: "leaveChannel" }).then(s => console.log(s))
+  db.set(`serverSettings_${message.guild.id}`, args[0].slice(2).replace('>', ''), {target: "leaveChannel" }); //Stop overriding Welcome u nub 
+  db.fetch(`serverSettings_${message.guild.id}`, { target: "leaveChannel" }).then(s => console.log(s)) // GG
   
   await message.channel.send
         (successEmbed).then
@@ -39,9 +39,8 @@ module.exports.run = async (client, message, args) => {
             (msg => msg.delete(5000))
     return;
   };
-//
 
-exports.conf = {
+exports.conf = { //kk
 aliases: ['setlc', 'setleavechannel']
 };
 

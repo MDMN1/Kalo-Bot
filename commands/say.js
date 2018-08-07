@@ -29,14 +29,14 @@ const mappings = (function (object) {
     n: '\u0274',
     o: '\u1D0F',
     p: '\u1D18',
-    q: '\u0071',
+    q: '\u01EB',
     r: '\u0280',
     s: '\uA731',
     t: '\u1D1B',
     u: '\u1D1C',
     v: '\u1D20',
     w: '\u1D21',
-    x: '\u0078',
+    x: '\u0078',//this one needs fixed to something smaller but not lowercase
     y: '\u028F',
     z: '\u1D22'
 });

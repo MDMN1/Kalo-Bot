@@ -8,7 +8,7 @@ const app = express();
   app.listen(process.env.PORT);
     setInterval(() => {
       http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-  }, 300000);
+  }, 280000);
 
   const Discord = require ('discord.js');
   const client = new Discord.Client();

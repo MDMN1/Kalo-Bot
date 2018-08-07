@@ -4,12 +4,12 @@ const Discord = require("discord.js");
     if (!args[0]){
       const embed = new Discord.RichEmbed()
         .setThumbnail('https://cdn.glitch.com/c4d13276-5b80-4293-88a3-29ef7fdcde4d%2FKalo%20Logo%20filled.png?1531016364768')
-          .addField('**Discord Quick links**', `[Discord Invite Link](https://discord.gg/kRr32v3)`)
-            .addField('**Minecraft Server IP**', 'play.KalopsiaMC.com')
-              .addField('**Quick Links**', `[Website](http://kalo-mc.com/index.php) | [Store](https://kalomc.craftingstore.net/)`)
-            .addField('**Rules**', `[Server Rules](http://kalo-mc.com/index.php?pages/server-rules/) | [Discord Rules](http://kalo-mc.com/index.php?pages/discord-rules/) | [All Rules](http://kalo-mc.com/index.php?pages/Rules/)`)
-          .addField('**Vote Links**', `[Vote 1](http://vote1.kalo-mc.com/) | [Vote 2](http://vote2.kalo-mc.com/) | [Vote 3](http://vote3.kalo-mc.com/)`)
-        .addField('**Commands**', '!invite | !ip | !rules |!store | !vote | !help [command_name]')
+          .addField('**Kalo-Bot Help Center**', '[Discord Invite Link](https://discord.gg/45qWGNg)')
+            .addField('**Minecraft Server IP**', 'play.kalo-mc.com')
+              .addField('**Quick Links**', `[Forums](http://forums.kalo-mc.com/index.php) | [Store](https://kalomc.craftingstore.net/)`)
+            .addField('**Rules**', `[Server Rules](http://forums.kalo-mc.com/index.php?threads/global-server-rules.2/) | [Discord Rules](https://discord.gg/nPr9YUF) | \`!rules for all rule links\``)
+          .addField('**Vote Links**', `[Vote 1](https://minecraftservers.org/server/506654) | [Vote 2](https://minecraft-mp.com/server-s199857) | [Vote 3](https://topg.org/server-kalomc-id494606)`)
+        .addField('**Commands**', '!invite | !ip | !rules | !store | !vote \n **Do !help [command_name] for more information on a command**\n`ex: !help invite`')
          message.channel.send(embed);
           message.delete(5000);
             } else {
