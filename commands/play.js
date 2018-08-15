@@ -97,7 +97,8 @@ module.exports.run = async (client, message, args, queue, serverQueue) => {
 						});
 					} catch (err) {
 						console.error(err);
-						return message.channel.send('No or invalid value entered, cancelling video selection.');
+						return message.channel.send
+              ('No or invalid value entered, cancelling video selection.');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
@@ -111,10 +112,10 @@ module.exports.run = async (client, message, args, queue, serverQueue) => {
     } 
     };
 exports.conf = {
-aliases: ['play', 'start']
+aliases: ['play']
 };
 exports.help = {
 name: 'play',
 description: 'Play a certain song', 
-usage: `${process.env.PREFIX}play [youtube music link]`
+usage: `${process.env.PREFIX}play [youtube music link]/[search term]`
 };

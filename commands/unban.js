@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
   const errEmbed = new Discord.RichEmbed()
     .setColor('#ed455a')
       .setTitle('`Error`')
-        .setDescription('```You do not have **ADMINISTRATOR** Permissions```')
+        .setDescription('```You do not have **BAN_MEMBERS** Permissions```')
     
   const errEmbed2 = new Discord.RichEmbed()
     .setColor('#ed455a')
@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args) => {
   const user = args[0];
   const modlog = message.guild.channels.find('name', 'moderation-logs');
   
-  if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send
+  if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send
         (errEmbed).then
           (message.delete()).then
             (msg => msg.delete(5000));
@@ -56,14 +56,14 @@ module.exports.run = async (client, message, args) => {
           (message.delete()).then
             (msg => msg.delete(5000));
 
-  message.guild.unban(user);
+  message.guild.unban(`<@!${user}>`);
 
     const embed = new Discord.RichEmbed()
     .setThumbnail(message.author.displayAvatarURL)
     .setColor('#73e878')
     .addField('Staff Member:', `${message.author.tag}`, true)
     .addField('Action:', '`Unbanned`', true)
-    .addField('User:', `<@!${user}>`, true)
+    .addField('User:', `${user}`, true)
     .addField('Reason:', `${reason}`, true)
     modlog.send(embed)
     

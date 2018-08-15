@@ -1,6 +1,6 @@
   const d = require ('discord.js')
 module.exports.run = (client, message, args) => {
-  if(message.author.id == process.env.RALID || message.author.id == process.env.FREAKID) { 
+  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK) { 
   if (args[0] === 'client.token') {
  let embede = new d.RichEmbed()
     .setColor(`#00ff00`)

@@ -1,9 +1,8 @@
 const db = require ('quick.db')
 
 exports.run = async (client, member) => {
-//ye its not storing into the json file @here
+
   let role =  member.guild.roles.find('name', 'Member');
-  //fix for now
   // let welcomeChannel = member.guild.channels.find('name', 'welcome');
   let nameg = await db.fetch(`serverSettings_${member.guild.id}`, { target:"welcomeChannel"});
   let welcomeChannel = member.guild.channels.get(nameg);
@@ -20,17 +19,17 @@ exports.run = async (client, member) => {
   const {body:avatar} = await get(member.user.displayAvatarURL);
   const image = new Canvas(1000, 300)
   
-    .addImage(body, 0, 0, 1000, 300) //yo i know wut all the numbers stand for now, ( vs code) >?
+    .addImage(body, 0, 0, 1000, 300)
       .setTextFont('30px Arial')
         .setColor('#FFFFFF')
-          .addText(name, 650, 280)//x, y, maxWidth
+          .addText(name, 650, 280)
           .setTextAlign('center')
         .addRoundImage(avatar, 685,40,182,182,92)    //x, y, width, height, radius
       .restore()
     .toBuffer();
 //Autorole after 5min
           setTimeout(function(){
-           // member.addRole(role).then(      DB code is the issue. Rest works fine
+           // member.addRole(role).then(     
              welcomeChannel.send(new Attachment(Buffer.from(image), 'welcome.png'))//) 
              
 //      const serverStatus = {
@@ -45,6 +44,3 @@ exports.run = async (client, member) => {
 //     client.channels.get(serverStatus.botCountID).setName(`Bot Count : ${member.guild.members.filter(m => m.user.bot).size}`);
       }, 5000  //5sec for testing
   )}
-
-//1min = 60000
-//5min = 300000

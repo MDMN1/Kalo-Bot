@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```There was not a #announcements channel.\nI created one for you. redo your announcement```')  
   
-      if  (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
+      if  (!message.member.hasPermissions("MANAGE_MESSAGES")) return message.channel.send
             (errEmbed).then
               (message.delete()).then
                 (msg => msg.delete(5000));
@@ -44,7 +44,7 @@ module.exports.run = async (client, message, args) => {
             .setDescription(`${announcement}`)
               .setTimestamp();
                 AnnouncementChannel.send(embed)
-                  message.channel.send(`@everyone\n\n:white_check_mark:New Announcement in ${AnnouncementChannel}`).then (message.delete()).then (msg => msg.delete(86400000));//24hr before deletion
+                  message.channel.send(`@everyone\n\n:white_check_mark:New Announcement in ${AnnouncementChannel}`).then (message.delete()).then (msg => msg.delete(43200000));//12hr before deletion
     }
 
     exports.conf = {

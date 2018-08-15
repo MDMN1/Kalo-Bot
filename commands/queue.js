@@ -1,11 +1,10 @@
 module.exports.run = (client, message, args, serverQueue) => {
   
-if (!serverQueue) return message.channel.send('There is nothing playing.');
-		return message.channel.send(`
-__**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-**Now playing:** ${serverQueue.songs[0].title}
-		`);
+// if (!serverQueue) return message.channel.send('There is nothing playing.');
+// 		return message.channel.send(`__**Song queue:**__\n${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}**Now playing:** ${serverQueue.songs[0].title}`);
+// }
+
+console.log(serverQueue.songs.map(s => s))
 }
 
 exports.conf = {

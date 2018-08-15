@@ -1,6 +1,3 @@
-
-
-
 const mappings = (function (object) {
     let output = [];
 

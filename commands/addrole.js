@@ -5,13 +5,13 @@ module.exports.run = async (client, message, args) => {
     let user = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     let role = args.join(" ").slice(22);
     let gRole = message.guild.roles.find('name', role);
-    let modlog = message.guild.channels.find('name', 'moderation-log');
+    let modlog = message.guild.channels.find('name', 'moderation-logs');
 
 
     const errEmbed = new Discord.RichEmbed()
       .setColor('#ed455a')
         .setTitle('`Error`')
-          .setDescription('```You do not have **MANAGE_ROLES_OR_PERMISSIONS** Permissions```')
+          .setDescription('```You do not have **MANAGE_ROLES** Permissions```')
 
     const errEmbed2 = new Discord.RichEmbed()
       .setColor('#ed455a')
@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
     const errEmbed4 = new Discord.RichEmbed()
       .setColor('#ed455a')
         .setTitle('`Error`')
-          .setDescription('```I could not find that role. Make sure you spelled it right(all lowercase)```') 
+          .setDescription('```I could not find that role. Make sure you spelled it right```') 
     
     const errEmbed5 = new Discord.RichEmbed()
       .setColor('#ed455a')
@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args) => {
           .setDescription('```Mentioned User already has that role```') 
   
   
-      if(message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
+      if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
           (errEmbed).then
             (message.delete()).then
               (msg => msg.delete(5000));
@@ -59,7 +59,7 @@ module.exports.run = async (client, message, args) => {
             (message.delete()).then
               (msg => msg.delete(3000));
   
-    if  (user.highestRole >= message.author.highestRole) return message.channel.send
+    if  (user.highestRole > message.author.highestRole) return message.channel.send
           (errEmbed5).then
             (message.delete()).then
               (msg => msg.delete(3000));
@@ -75,7 +75,7 @@ module.exports.run = async (client, message, args) => {
         try{
             await user.send(`Congrats! You have been given the role **${role}** on ${message.guild.name}`)
                 }catch(e) {
-                   modlog.send(`Congrats! ${user} was given the role **${gRole}**`).then (msg => msg.delete(3000));
+                   modlog.send(`${user} was given the role **${gRole}**`).then (msg => msg.delete());
                 }
     }
 

@@ -2,10 +2,10 @@ const Discord = module.require("discord.js");
 
 module.exports.run = async (client, message, args) => {
   
-    let user = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    let user = message.guild.member(message.mentions.users.first())
     let role = args.join(" ").slice(22);
     let gRole = message.guild.roles.find('name', role);
-    let modlog = message.guild.channels.find('name', 'moderation-log');
+    let modlog = message.guild.channels.find('name', 'moderation-logs');
 
     const errEmbed = new Discord.RichEmbed()
       .setColor('#ed455a')
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args) => {
     const errEmbed4 = new Discord.RichEmbed()
       .setColor('#ed455a')
         .setTitle('`Error`')
-          .setDescription('```I could not find that role. Make sure you spelled it right(all lowercase)```') 
+          .setDescription('```I could not find that role. Make sure you spelled it right```') 
     
     const errEmbed5 = new Discord.RichEmbed()
       .setColor('#ed455a')
@@ -58,7 +58,7 @@ module.exports.run = async (client, message, args) => {
             (message.delete()).then
               (msg => msg.delete(3000));
   
-    if  (user.highestRole >= message.author.highestRole) return message.channel.send
+    if  (user.highestRole > message.author.highestRole) return message.channel.send
           (errEmbed5).then
             (message.delete()).then
               (msg => msg.delete(3000));
@@ -74,7 +74,7 @@ module.exports.run = async (client, message, args) => {
         try{
             await user.send(`You have been **stripped** of the role **~~${gRole.name}~~** on ${message.guild.name}`)
         } catch(e) {
-                modlog.send(`${user} was **stripped** of the role **~~${gRole}~~**`).then (msg => msg.delete(3000))
+                modlog.send(`${user} was **stripped** of the role **~~${gRole}~~**`).then (msg => msg.delete(600000))
             }
 }
 exports.conf = {
