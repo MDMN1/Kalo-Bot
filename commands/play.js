@@ -3,24 +3,27 @@ const YouTube = require ('simple-youtube-api')
 const youtube = new YouTube('AIzaSyCefMliblFdxy2xaEuXrEr_e1f8Hn4Jqdw')
 
 module.exports.run = async (client, message, args, queue, serverQueue) => {
-
   const url = message.content.split(' ')[1].replace(/<(,+)>/g, '$1')
   const voiceChannel = message.member.voiceChannel;
-		
-  if (!voiceChannel) return message.channel.send
-        ('I\'m sorry but you need to be in a voice channel to play music!');
-		
   const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) {
-			return message.channel.send
-        ('I cannot connect to your voice channel! Gimme Perms!');
-		}
-		if (!permissions.has('SPEAK')) {
-			return message.channel.send
-        ('I cannot speak in this voice channel! Gimme Perms!');
-		}
-    function play(guild, song) {
-	const serverQueue = queue.get(guild.id);
+  
+if  (message.channel.id !== '419249007169110026') return message.channel.send
+   ('You need to be in #music-commands to play music').then (message.delete()).then(m=>m.delete(3000));
+  
+if  (message.member.voiceChannelID !== '419249041717854210') return message.channel.send
+      ('You need to be in the Music Room to use this command').then (message.delete()).then(m=>m.delete(3000));
+  	
+if  (!voiceChannel) return message.channel.send
+      ('I\'m sorry but you need to be in a voice channel to play music!').then (message.delete()).then(m=>m.delete(3000));
+		
+if  (!permissions.has('CONNECT')) return message.channel.send
+      ('I cannot connect to your voice channel! Gimme Perms!').then (message.delete()).then(m=>m.delete(3000));
+
+if  (!permissions.has('SPEAK')) return message.channel.send
+        ('I cannot speak in this voice channel! Gimme Perms!').then (message.delete()).then(m=>m.delete(3000));
+  
+  function play(guild, song) {
+	  const serverQueue = queue.get(guild.id);
 
 	if (!song) {
 		serverQueue.voiceChannel.leave();
@@ -50,7 +53,7 @@ module.exports.run = async (client, message, args, queue, serverQueue) => {
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: 5,
+			volume: 3,
 			playing: true
 		};
 		queue.set(msg.guild.id, queueConstruct);

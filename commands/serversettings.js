@@ -18,11 +18,11 @@ exports.run = async (client, message) => {
     }
   }    
   exports.conf = {
-    aliases: ['ss'],
+    aliases: ['ss', 'config'],
   };
   
   exports.help = {
     name: 'serversettings',
     description: 'serversettings',
-    usage: `${process.env.PREFIX}setversettings`
+    usage: `${process.env.PREFIX}serversettings`
   };

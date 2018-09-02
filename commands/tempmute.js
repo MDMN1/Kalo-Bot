@@ -49,10 +49,10 @@ module.exports.run = async (client, message, args) => {
         .setDescription('```This user is already muted```') 
   
   
-    if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
-          (errEmbed).then
-            (message.delete()).then
-              (msg => msg.delete(5000));
+    // if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
+    //       (errEmbed).then
+    //         (message.delete()).then
+    //           (msg => msg.delete(5000));
 
       if  (!modlog) return message.channel.send
             (errEmbed2).then
@@ -79,7 +79,7 @@ module.exports.run = async (client, message, args) => {
             (message.delete()).then
               (msg => msg.delete(5000));
   
-    if  (message.guild.member(user).roles.has(role.id)) return message.channel.send
+    if  (message.guild.member(user).roles.has(role)) return message.channel.send
           (errEmbed8).then
             (message.delete()).then
               (msg => msg.delete(5000));

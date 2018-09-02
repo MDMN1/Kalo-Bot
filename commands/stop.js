@@ -1,5 +1,11 @@
 exports.run = (client, message, args, ops) => {
 
+  if  (message.channel.id !== '419249007169110026') return message.channel.send
+      ('You need to be in #music-commands to play music').then (message.delete()).then(m=>m.delete(3000));
+  
+if  (message.member.voiceChannelID !== '419249041717854210') return message.channel.send
+      ('You need to be in the Music Room to use this command').then (message.delete()).then(m=>m.delete(3000));
+  
   if(!message.member.voiceChannel) return message.channel.send('you are not in a voice channel');
   
   if(!message.guild.me.voiceChannel) return message.channel.send('sorry, bot isnt connected to guild')

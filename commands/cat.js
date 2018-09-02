@@ -13,7 +13,8 @@ exports.run = async (client, message ) => { //neither of those are
     let embed = new Discord.RichEmbed()
         .setImage(body.file)
     message.channel.send(embed)
-}
+  message.delete()
+}  
 
     exports.conf = {
         aliases: ['kitty', 'kat']

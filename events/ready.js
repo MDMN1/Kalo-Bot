@@ -22,7 +22,7 @@ client.aliases = new Discord.Collection();
                                     let props = require(`../commands/${f}`);
                                         // console.log(`${i+1}: ${f}`);
                                             client.commands.set(props.help.name, props);
-                                                props.conf.aliases.forEach(alias => {
+                                                   props.conf.aliases.forEach(alias => {
                                                     client.aliases.set(alias, props.help.name);
         });
       });

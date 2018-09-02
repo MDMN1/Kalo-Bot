@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 
   module.exports.run = async (client, message, args) => {
 
-  let pages = ['**All Kalo-Bot Commands**\n\n!8ball\n!ascii\n!botinfo\n!cat', '!commands\n!dog\n!help\n!invite','!ip\n!now\n!oof\n!ping','!rules\n!serverinfo\n!stop\n!store','!userinfo\n!vote','For more information on a command do !help [command name]'];  //array for pages
+  let pages = ['**All Kalo-Bot Commands**\n\n!8ball\n!ascii\n!botinfo\n!cat', '!commands\n!dog\n!help\n!invite','!ip\n!now\n!oof\n!ping','!rules\n!serverinfo\n!stop\n!store','!userinfo\n!vote\n!kalo','For more information on a command do !help [command name]'];  //array for pages
   let page = 1;  //default page
     
     const embed = new Discord.RichEmbed()

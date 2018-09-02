@@ -11,6 +11,7 @@ exports.run = async (client, message ) => { //neither of those are
     let embed = new Discord.RichEmbed()
         .setImage(body.url)
     message.channel.send(embed)
+  message.delete()
 }
 
     exports.conf = {
