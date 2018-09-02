@@ -42,6 +42,7 @@ module.exports.run = (client, message, args) => {
           } else {
             return text}}
 
+
     exports.conf = {
       aliases: ['eval', 'e', 'code']
     };

@@ -10,7 +10,6 @@ const app = express();
       http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
   }, 280000);
 
-
 // =================================================================================
 
   const Discord = require ('discord.js');

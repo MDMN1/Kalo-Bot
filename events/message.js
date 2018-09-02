@@ -1,16 +1,37 @@
   const Discord = require ('discord.js');
   const client = new Discord.Client();
   const fs = require ('fs')
-  const talkedRecently = new Set();
   const queue = new Map();
+
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+
+    fs.readdir(`./commands/`, (err, files) => {
+        if (err) console.error(err);
+            let jsfiles = files.filter(f => f.split(".").pop() === "js");
+                if(jsfiles.length <= 0) {
+                    console.log("No commands to load!");
+                        return };
+                            console.log(`[Commands]\t Loaded a total amount of ${jsfiles.length} commands!`);
+                                jsfiles.forEach((f, i) => {
+                                    let props = require(`../commands/${f}`);
+                                        // console.log(`${i+1}: ${f}`);
+                                            client.commands.set(props.help.name, props);
+                                                   props.conf.aliases.forEach(alias => {
+                                                    client.aliases.set(alias, props.help.name);
+        });
+      });
+    });
 
 exports.run = async (client, message) => {
 
+  
+  
  const serverQueue = queue.get(message.guild.id);
   let args = message.content.slice(process.env.PREFIX.length).trim().split(' ');
 	let command = args.shift().toLowerCase();
   
-  if (!client.commands.has(command)) return;
+  //if (!client.commands.has(command) || client.aliases.has(command)) return;
   let cmd;
   let Staff = message.member.roles.has('name','Staff')
   
@@ -24,17 +45,4 @@ exports.run = async (client, message) => {
         cmd = client.commands.get(client.aliases.get(command));
     	  }
       cmd.run(client, message, args, queue, serverQueue)
-  
-  //Command cooldown/warning
-  if (Staff) return;
-  if (talkedRecently.has(message.author.id))  return;
-  // Adds the user to the set so that they can't talk for 2.5 seconds
-  talkedRecently.add(message.author.id);
-  setTimeout(() => {
-    // Removes the user from the set after 2.5 seconds
-    talkedRecently.delete(message.author.id);
-}, 2500);
-  
-
-
 }

@@ -4,7 +4,8 @@ const db = require ('quick.db')
 exports.run = async (client, message) => {
     if(message.author.id === process.env.RAL || message.author.id === process.env.FREAK) {
 
-
+ let test = await db.fetch(`serverSettings_${message.guild.id}`);
+      console.log(test)
   let welcome = await db.fetch(`serverSettings_${message.guild.id}`, {target: "welcomeChannel"}); 
   let leave = await db.fetch(`serverSettings_${message.guild.id}`, {target: "leaveChannel"});
       
