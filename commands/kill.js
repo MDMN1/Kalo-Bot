@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
    if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK){
      
         const embed = new Discord.RichEmbed()
-        .setTitle('Shutting Down...')
+        .setTitle('Restarting...')
         .setColor('#00ff00')
         .setDescription('3')
         message.delete()
@@ -20,8 +20,8 @@ module.exports.run = async (client, message, args) => {
                 m.edit(embed).then (m => {
 
                     embed.setColor('#FF0000'),
-                    embed.setDescription('Goodbye!')
-                    m.edit(embed)}).then(c => process.kill)                    
+                    embed.setDescription('Poof!')
+                    m.edit(embed)}).then(() => process.abort()) //&& process.exit  
         })
     })
   }
@@ -32,6 +32,6 @@ exports.conf = {
   
   exports.help = {
     name: 'kill',
-    description: 'Forces the bot offline',
+    description: 'Forces the bot to restart',
     usage: `${process.env.PREFIX}kill`
   };

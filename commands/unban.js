@@ -2,6 +2,11 @@ const Discord = module.require("discord.js");
 
 module.exports.run = async (client, message, args) => {
 
+
+    const modlog = message.guild.channels.find(n => n.name === 'moderation-logs');
+    const reason = args.slice(1).join(' ');
+    let user = args[0];
+  
   const errEmbed = new Discord.RichEmbed()
     .setColor('#ed455a')
       .setTitle('`Error`')
@@ -27,43 +32,49 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```You must have a reason to unban a user for verification purposes```')
   
-  const reason = args.slice(1).join(' ');
-  const user = args[0];
-  const modlog = message.guild.channels.find('name', 'moderation-logs');
-  
+    const errEmbed6 = new Discord.RichEmbed()
+    .setColor('#ed455a')
+      .setTitle('`Error`')
+        .setDescription('```This User is not banned```')
+ 
   if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send
         (errEmbed).then
           (message.delete()).then
-            (msg => msg.delete(5000));
+            (msg => msg.delete(3000));
   
   if  (!modlog) return message.channel.send
         (errEmbed2).then
           (message.delete()).then
-            (msg => msg.delete(5000));
+            (msg => msg.delete(3000));
   
-  if  (!user) return message.channnel.send
+  if  (!user) return message.channel.send
         (errEmbed3).catch(console.error).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
-  
-  if  (user.highestRole >= message.author.highestRole) return message.channel.send
-        (errEmbed4).then
           (message.delete()).then
             (msg => msg.delete(3000));
   
-  if  (!reason) return message.channel.send
-        (errEmbed5).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
+  if  (user.highestRole >= message.author.highestRole) return message.channel.send
+          (errEmbed4).then
+            (message.delete()).then
+              (msg => msg.delete(3000));
+  
+  if (!user.bannable) return message.channel.send
+      (errEmbed6).then
+        (message.delete()).then
+          (msg => msg.delete(3000));
+  
+ if (!reason) return message.channel.send
+      (errEmbed5).then
+        (message.delete()).then
+          (msg => msg.delete(3000));
 
-  message.guild.unban(`<@!${user}>`);
+  message.guild.unban(user);
 
     const embed = new Discord.RichEmbed()
     .setThumbnail(message.author.displayAvatarURL)
     .setColor('#73e878')
     .addField('Staff Member:', `${message.author.tag}`, true)
     .addField('Action:', '`Unbanned`', true)
-    .addField('User:', `${user}`, true)
+    .addField('User:', `user`, true)
     .addField('Reason:', `${reason}`, true)
     modlog.send(embed)
     

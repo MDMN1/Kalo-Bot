@@ -4,7 +4,7 @@ const Discord = require("discord.js");
     
     const embed = new Discord.RichEmbed()
       .setTitle('__Server IP__')
-      .setColor('#14bdf5')
+      .setColor('#41baea')
       .setDescription('play.kalo-mc.com')
     message.channel.send(embed)
     message.delete(5000);    

@@ -8,6 +8,7 @@ const Discord = require('discord.js');
 	  const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
     const embed = new Discord.RichEmbed()
       .setDescription(`----------------------------------`)
+      .setColor('#41baea')
         .setTitle(`${client.user.username}'s Information and Stats`)
           .setThumbnail(client.user.displayAvatarURL)
             .setFooter(`Bot Created by: Ralston & Freak <3`)

@@ -4,7 +4,7 @@ const Discord = require("discord.js");
     if (!args[0]){
       const embed = new Discord.RichEmbed()
         .setThumbnail('https://cdn.glitch.com/c4d13276-5b80-4293-88a3-29ef7fdcde4d%2FKalo%20Logo%20filled.png?1531016364768')
-          .addField('**Kalo-Bot Help Center**', '[Discord Invite Link](https://discord.gg/45qWGNg)')
+          .addField('**Kalo-Bot Help Center**', '[Discord Invite Link](https://discord.gg/VTfnse9)')
             .addField('**Minecraft Server IP**', 'play.kalo-mc.com')
               .addField('**Quick Links**', `[Forums](http://forums.kalo-mc.com/index.php) | [Store](https://kalomc.craftingstore.net/)`)
             .addField('**Rules**', `[Server Rules](http://forums.kalo-mc.com/index.php?threads/global-server-rules.2/) | [Discord Rules](https://discord.gg/nPr9YUF) | \`!rules for all rule links\``)

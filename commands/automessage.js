@@ -2,23 +2,28 @@ const Discord = require ('discord.js')
 let ms = require ('ms');
 module.exports.run = (client, message, args) => {
   let general = message.guild.channels.find(c=>c.name === 'general')
-  let Description = args[0];
+ // let Description = args[0];
   
-  let time = ms(`${args[1]}`)
-      
+  //let time = ms(`${args[1]}`)
   
+  let test = args.join(" ").split(" | ");
+  console.log(test[0])
+      //god level
+
     
+    message.delete()
 let embed = new Discord.RichEmbed()  
-    .setTitle(Description)
-    .setColor('')
-  //no joke thats what this is mainly for xD
-  
+    .setTitle(test[0])  
+    .setColor('#41baea')
 
 setInterval (function () {
   general.send(embed)
-  message.delete()
-}, time); //10 sec for testing but we need to be able to edit the day and hrs it sends
-     } // 3.6e+6 for an hour
+  
+}, ms(test[1])); 
+
+
+
+ }
 
     exports.conf = {
       aliases: ['auto', 'timedmsg' , 'automsg']

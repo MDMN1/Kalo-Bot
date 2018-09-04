@@ -7,10 +7,14 @@ module.exports.run = async (client, message, args, queue, serverQueue) => {
   const voiceChannel = message.member.voiceChannel;
   const permissions = voiceChannel.permissionsFor(message.client.user);
   
-if  (message.channel.id !== '419249007169110026') return message.channel.send
+  const musicText = message.guild.channels.find(n => n.name === 'music-commands');
+  const musicVoice = message.guild.channels.find(v => v.name === 'Music Room');
+  
+  
+if  (message.channel.name !== musicText) return message.channel.send
    ('You need to be in #music-commands to play music').then (message.delete()).then(m=>m.delete(3000));
   
-if  (message.member.voiceChannelID !== '419249041717854210') return message.channel.send
+if  (message.voiceChannel.name !== musicVoice) return message.channel.send
       ('You need to be in the Music Room to use this command').then (message.delete()).then(m=>m.delete(3000));
   	
 if  (!voiceChannel) return message.channel.send
@@ -21,6 +25,9 @@ if  (!permissions.has('CONNECT')) return message.channel.send
 
 if  (!permissions.has('SPEAK')) return message.channel.send
         ('I cannot speak in this voice channel! Gimme Perms!').then (message.delete()).then(m=>m.delete(3000));
+  
+if (!url) return message.channel.send
+    ('Please insert a URL or search Term').then (message.delete()).then(m=>m.delete(3000));
   
   function play(guild, song) {
 	  const serverQueue = queue.get(guild.id);

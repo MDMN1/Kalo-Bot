@@ -26,6 +26,7 @@ var url = 'http://mcapi.us/server/status?ip=' + mcIP;
     
   const embed = new Discord.RichEmbed()
     .setTitle('Server Status')
+    .setColor('#41baea')
     .setThumbnail(message.guild.iconURL)
     .setDescription(status)
     .setTimestamp()

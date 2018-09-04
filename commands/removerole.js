@@ -4,8 +4,8 @@ module.exports.run = async (client, message, args) => {
   
     let user = message.guild.member(message.mentions.users.first())
     let role = args.join(" ").slice(22);
-    let gRole = message.guild.roles.find('name', role);
-    let modlog = message.guild.channels.find('name', 'moderation-logs');
+    let gRole = message.guild.roles.find(r => r.name === role);
+    let modlog = message.guild.channels.find(n => n.name === 'moderation-logs');
 
     const errEmbed = new Discord.RichEmbed()
       .setColor('#ed455a')

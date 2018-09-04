@@ -9,6 +9,7 @@ module.exports.run = (client, message, args) => {
   .addField('UserID', 'oof')
   .addField('Status', 'oof')
   .addField('Roles','oof')
+  .setColor('#41baea')
   
   message.channel.send(embed)
   message.delete()

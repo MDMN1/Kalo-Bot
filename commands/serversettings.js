@@ -15,6 +15,7 @@ exports.run = async (client, message) => {
   .addField('__Leave Channel__', `<#${leave}>`)
 
   message.channel.send(embed)
+      message.delete()
  
     }
   }    

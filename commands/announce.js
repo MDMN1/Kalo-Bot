@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 
 module.exports.run = async (client, message, args) => {
   const announcement = args.join(" ");
-  const AnnouncementChannel = message.guild.channels.find('name', 'announcements')
+  const AnnouncementChannel = message.guild.channels.find(n => n.name === 'announcements')
     
   const errEmbed = new Discord.RichEmbed()
   .setColor('#FF0000')
@@ -34,17 +34,15 @@ module.exports.run = async (client, message, args) => {
         (errEmbed2).then 
           (message.delete()).then 
             (msg => msg.delete(5000));
-  
-   
 
     const embed = new Discord.RichEmbed()
-      .setColor('#FFD700')
+      .setColor('#41baea')
         .setThumbnail(message.author.displayAvatarURL)
           .setTitle(`__Announcement From:__ ${message.author.tag}`)
-            .setDescription(`${announcement}`)
+            .setDescription(announcement)
               .setTimestamp();
                 AnnouncementChannel.send(embed)
-                  message.channel.send(`@everyone\n\n:white_check_mark:New Announcement in ${AnnouncementChannel}`).then (message.delete()).then (msg => msg.delete(43200000));//12hr before deletion
+                  message.channel.send(`:white_check_mark:New Announcement in ${AnnouncementChannel}`).then (message.delete()).then (msg => msg.delete(43200000));//12hr before deletion
     }
 
     exports.conf = {

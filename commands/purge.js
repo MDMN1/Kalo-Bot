@@ -63,9 +63,10 @@ if  (!amount && !user) return message.channel.send
       .setColor('#e0b72e')
         .setTitle('Clearing Messages<:crumpledpaper:430231307612585996><:crumpledpaper:430231307612585996><:crumpledpaper:430231307612585996>')
           message.delete()
-            message.channel.send(embed)
+            message.channel.send(embed).then
+          (msg => msg.delete(3000));
 
-    let fetched = await message.channel.fetchMessages({limit: args[0]})
+    let fetched = message.channel.fetchMessages({limit: args[0]})
         
       message.channel.bulkDelete(fetched).then (msg => {
 

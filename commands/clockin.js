@@ -1,7 +1,7 @@
 const Discord = module.require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-      let timeChannel = message.guild.channels.find(n => n.name === 'time-sheet')
+      let timeChannel = message.guild.channels.find(n => n.name === 'work-clock')
       let clockedinRole = message.guild.roles.find(r => r.name === 'Clocked-In')
       
       

@@ -6,7 +6,7 @@ const Discord = module.require("discord.js");
   let page = 1;  //default page
     
     const embed = new Discord.RichEmbed()
-      .setColor('#c5f2e1')
+      .setColor('#41baea')
       .setFooter(`Page ${page} of ${pages.length}`)
       .setDescription(pages[page-1])
 

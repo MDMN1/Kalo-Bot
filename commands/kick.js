@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 module.exports.run = async (client, message, args) => {
   
   const reason = args.join(" ").slice(22);
-  const modlog = message.guild.channels.find('name', 'moderation-logs');
+  const modlog = message.guild.channels.find( n => n.name === 'moderation-logs');
   let user = message.mentions.users.first() || message.guild.members.get(args[0]);
   
   const errEmbed = new Discord.RichEmbed()

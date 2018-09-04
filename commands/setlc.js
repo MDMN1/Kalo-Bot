@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
   
   
-  let modlog = message.guild.channels.find('name', 'moderation-logs');
+  let modlog = message.guild.channels.find( n => n.name, 'moderation-logs');
   
  const errEmbed = new Discord.RichEmbed()
     .setColor('#ed455a')
@@ -20,10 +20,10 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Success`')
         .setDescription('```Leave Channel has been successfully changed```')
  
-  if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send
-        (errEmbed).then
-          (message.delete()).then
-            (msg => msg.delete(5000));
+  // if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send
+  //       (errEmbed).then
+  //         (message.delete()).then
+  //           (msg => msg.delete(5000));
   
   if  (!args.join()) return message.channel.send
         (errEmbed2).then
