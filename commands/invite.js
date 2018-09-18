@@ -2,8 +2,8 @@ const Discord = require("discord.js");
   
   module.exports.run = (client, message, args) => {
     
- message.channel.send('https://discord.gg/45qWGNg');
-    message.delete(5000);    
+ message.channel.send('https://discord.gg/VTfnse9');
+    message.delete(3000);    
   };
 
   exports.conf = {

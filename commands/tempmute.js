@@ -4,7 +4,7 @@ const ms = require('ms');
 module.exports.run = async (client, message, args) => {
 
       let user = message.mentions.users.first() || message.guild.members.get(args[0]);
-      let modlog = message.guild.channels.find('name', 'moderation-logs');
+      let modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
       let role = message.guild.roles.find(r => r.name === "Muted");
       let mutetime = args[1];
   
@@ -48,41 +48,42 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```This user is already muted```') 
   
+//========================  End of Error Embeds  =======================//
   
-    // if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
-    //       (errEmbed).then
-    //         (message.delete()).then
-    //           (msg => msg.delete(5000));
+    if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
+          (errEmbed).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
 
       if  (!modlog) return message.channel.send
             (errEmbed2).then
               (message.delete()).then
-                (msg => msg.delete(5000));
+                (msg => msg.delete(3000));
 
     if  (!user) return message.channel.send
           (errEmbed3).then
             (message.delete()).then
-             (msg => msg.delete(5000));
+             (msg => msg.delete(3000));
 
     if  (user.id === message.author.id) return message.channel.send
           (errEmbed4).then
             (message.delete()).then
-              (msg => msg.delete(5000));
+              (msg => msg.delete(3000));
   
     if  (user.highestRole >= message.author.highestRole) return message.channel.send
           (errEmbed4).then
             (message.delete()).then
-              (msg => msg.delete(5000));
+              (msg => msg.delete(3000));
   
     if  (!mutetime) return message.channel.send
           (errEmbed7).then
             (message.delete()).then
-              (msg => msg.delete(5000));
+              (msg => msg.delete(3000));
   
     if  (message.guild.member(user).roles.has(role)) return message.channel.send
           (errEmbed8).then
             (message.delete()).then
-              (msg => msg.delete(5000));
+              (msg => msg.delete(3000));
   
 
     if  (!role) {
@@ -108,25 +109,28 @@ module.exports.run = async (client, message, args) => {
     }
  
     const embed = new Discord.RichEmbed()
-    .setThumbnail(message.author.displayAvatarURL)
-    .setColor('#ed455a')
-    .addField('Staff Member:', `${message.author.tag}`, true)
-    .addField('Action:', '`TempMute`', true)
-    .addField('User:', `${user}`, true)
-    .addField('Muted for:', `${ms(ms(mutetime))}`, true)
+        .setColor('#ed455a')
+        .setAuthor(message.author.tag, message.author.displayAvatarURL)
+        .addField('Action:', '`TempMute`', true)
+        .addField('__User__', `${user}`, true)
+        .addField(`__${user.tag}'s ID__`, user.id, true)
+        .addField('Muted for:', `${ms(ms(mutetime))}`, true)
+
+
+
+
     .setTimestamp();
     await message.guild.member(user).addRole(role);
    user.send(`You have been **Temp-Muted** from **${message.guild.name}** for '*${mutetime}* '`).then
     modlog.send(embed);
 
     const embed2 = new Discord.RichEmbed()
-    .setThumbnail(message.author.displayAvatarURL)
-    .setColor('#73e878')
-    .addField('Staff Member:', `${message.author.tag}`, true)
-    .addField('Action:', '`Unmuted`', true)
-    .addField('User:', `${user}`, true)
-    .addField('Duration of Mute:', `${ms(ms(mutetime))}`, true)
-    .setTimestamp();
+          .setAuthor(message.author.tag, message.author.displayAvatarURL)
+          .setColor('#73e878')
+          .addField('Action:', '`Unmuted`', true)
+          .addField('User:', `${user}`, true)
+          .addField('Duration of Mute:', `${ms(ms(mutetime))}`, true)
+          .setTimestamp();
 
     setTimeout(function(){
       message.guild.member(user).removeRole(role);

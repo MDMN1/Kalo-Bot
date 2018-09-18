@@ -1,0 +1,18 @@
+
+    module.exports.run = async (client, message, args) => {
+  
+        	   
+             
+             
+             
+  };
+
+  exports.conf = {
+    aliases: ['']
+  };
+
+  exports.help = {
+    name: '',
+    description: '',
+    usage: `${process.env.PREFIX}`
+  };

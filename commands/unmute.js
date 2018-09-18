@@ -3,7 +3,7 @@ const Discord = require(`discord.js`);
 
 module.exports.run = async (client, message, args) => {
     let reason = args.join(" ").slice(22);
-    let modlog = message.guild.channels.find('name', 'moderation-logs');
+    let modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
     let user = message.mentions.users.first() || message.guild.members.get(args[0]);
     let role = message.guild.roles.find(r => r.name === "Muted");
 
@@ -32,11 +32,12 @@ module.exports.run = async (client, message, args) => {
       .setTitle('`Error`')
         .setDescription('```You must have a reason to unmute a user for verification purposes```')  
 
+//========================  End of Error Embeds  =======================//
   
     if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send
           (errEmbed).then
             (message.delete()).then
-              (msg => msg.delete(5000));;
+              (msg => msg.delete(3000));;
   
 		if  (!user) return message.channel.send
           (errEmbed3);
@@ -57,7 +58,7 @@ module.exports.run = async (client, message, args) => {
   
 		await message.guild.member(user).removeRole(role);
 		const embed = new Discord.RichEmbed()
-            .setThumbnail(message.author.displayAvatarURL)
+          .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setColor('#73e878')
             .addField('Staff Member:', message.author.tag, true)
             .addField('Action:', '`UnMuted`', true)

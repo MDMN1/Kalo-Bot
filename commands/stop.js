@@ -1,20 +1,76 @@
-exports.run = (client, message, args, ops) => {
+const Discord = require('discord.js')  
+  exports.run = (client, message, args, ops) => {
 
-  if  (message.channel.id !== '419249007169110026') return message.channel.send
-      ('You need to be in #music-commands to play music').then (message.delete()).then(m=>m.delete(3000));
+//========================  Start of Variables  =======================//
+    
+    let musicText = message.guild.channels.find(t => t.name === 'music-commands');
+    let musicVoice = message.guild.channels.find(c => c.name === '🎶 Music Room');
+    let voiceChannel = message.member.voiceChannel;
+    
+//========================  End of Variables  =======================//
+//========================  Start of Embeds  =======================//
+    
+    const textChannelError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 01 •')
+          .setDescription('```You need to be in #music-commands to use music commands```')
+    
+    const voiceChannelError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 02 •')
+          .setDescription('```You need to be in the voice channel "🎶Music Room" for the commands to work```')
+    
+    const voiceChannelError2 = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 03 •')
+          .setDescription('```I\'m sorry but you need to be in a voice channel to play music!```')
+    
+    const botConnectionError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 04 •')
+          .setDescription('```Sorry, the bot isnt connected to any voice channels```')
+    
+    const sameVoiceError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 05 •')
+          .setDescription('```You aren\'t connected to the same channel as the bot```')
+    
+    const LeftMessage = new Discord.RichEmbed()
+          .setColor('41baea')
+          .setDescription(`I have left ${musicVoice}`)
+    
+//========================  End of Embeds  =======================//
   
-if  (message.member.voiceChannelID !== '419249041717854210') return message.channel.send
-      ('You need to be in the Music Room to use this command').then (message.delete()).then(m=>m.delete(3000));
+      if  (message.channel.id !== musicText.id) return message.channel.send
+          (textChannelError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
   
-  if(!message.member.voiceChannel) return message.channel.send('you are not in a voice channel');
+      if  (message.member.voiceChannel !== musicVoice) return message.channel.send
+          (voiceChannelError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
   
-  if(!message.guild.me.voiceChannel) return message.channel.send('sorry, bot isnt connected to guild')
+    if  (!voiceChannel) return message.channel.send
+          (voiceChannelError2).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
   
-  if(message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send('You arent connected in the same channel');
   
-  message.guild.me.voiceChannel.leave()
+    if  (!message.guild.me.voiceChannel) return message.channel.send
+          (botConnectionError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
   
-  message.channel.send('I have left the voice channel')
+    if (message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send
+        (sameVoiceError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
+  
+      message.guild.me.voiceChannel.leave()
+      message.channel.send(LeftMessage).then
+      (message.delete()).then
+      (msg => msg.delete(5000));
 }
 
 exports.conf = {

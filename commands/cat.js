@@ -1,27 +1,29 @@
-const Discord = require ("discord.js");
+const Discord = require('discord.js');
 const superagent = require ("superagent");
-const botsettings = process.env
-//oof still i wanna it to look like we are pro coders
-exports.run = async (client, message ) => { //neither of those are
+  exports.run = async (client, message ) => {
   
-  
-  
-    let {body} = await superagent
-        .get(`http://aws.random.cat/meow`)
-   
+//========================  Start of Variables  =======================//
+    
+    let {body} = await superagent.get(`http://aws.random.cat/meow`)
+    
+//========================  End of Variables  =======================//
+//========================  Start of Embeds  =======================//
 
-    let embed = new Discord.RichEmbed()
-        .setImage(body.file)
-    message.channel.send(embed)
-  message.delete()
-}  
+    const Cat = new Discord.RichEmbed()
+          .setImage(body.file)
+
+//========================  End of Embeds  =======================//
+    
+    message.channel.send(Cat)
+    message.delete()
+};
+
 
     exports.conf = {
-        aliases: ['kitty', 'kat']
-    };
-    
+    aliases: ['kitty', 'kat']
+}   
     exports.help = {
-        name: 'cat',
-        description: 'random cat pic',
-        usage: `${botsettings.PREFIX}cat`
-    };
+    name: 'cat',
+    description: 'random cat pic',
+    usage: `${process.env.PREFIX}cat`
+}

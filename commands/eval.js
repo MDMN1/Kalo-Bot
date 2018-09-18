@@ -1,13 +1,15 @@
-  const d = require ('discord.js')
-module.exports.run = (client, message, args) => {
+const Discord = require('discord.js');
+  module.exports.run = (client, message, args, queue, serverQueue) => {
+    
   if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK) { 
-  if (args[0] === 'client.token') {
- let embede = new d.RichEmbed()
-    .setColor(`#00ff00`)
-      .addField("**```Input```**", "```js\n" + args.join(" ") + "```")
-        .addField("**```Output```**", "```js\n" + '(ノಠ益ಠ)ノ 彡 ┻━┻' + "```")
-          message.channel.send(embede)
-  return;
+  
+    if (args[0] === 'client.toke~n') {
+   const  TokenError = new Discord.RichEmbed()
+          .setColor(`#00ff00`)
+          .addField("**```Input```**", "```js\n" + args.join(" ") + "```")
+          .addField("**```Output```**", "```js\n" + '(ノಠ益ಠ)ノ 彡 ┻━┻' + "```")
+          message.channel.send(TokenError)
+          return;
   };
     
     
@@ -16,7 +18,7 @@ module.exports.run = (client, message, args) => {
     var evaled = eval(code);
     if (typeof evaled !== 'string')
       evaled = require('util').inspect(evaled);
-    let embed = new d.RichEmbed()
+    let embed = new Discord.RichEmbed()
     .setColor(`#00ff00`)
       .addField("**```Input```**", "```js\n" + args.join(" ") + "```")
         .addField("**```Output```**", "```js\n" + clean(evaled) + "```")
@@ -24,7 +26,7 @@ module.exports.run = (client, message, args) => {
     if(clean(evaled).size < 30) {
     const hastebin = require('hastebin-gen');
     hastebin(`${clean(evaled)}`, "txt").then(r => {
-    let embed = new d.RichEmbed()
+    let embed = new Discord.RichEmbed()
             .setColor(`#00ff00`)
               .addField("**```Input```**", "```js\n" + args.join(" ") + "```")
                 .addField("**```Output To Large```**", "`" + r + "`")
@@ -52,52 +54,3 @@ module.exports.run = (client, message, args) => {
       description: '$@#! (ノಠ益ಠ)ノ 彡 ┻━┻', 
       usage: ' Im sorry... ┬──┬ ノ( ゜-゜ノ)'
     }
-
-
-/*
-module.exports.run = (bot, msg, args) => {
-const d = require ('discord.js')
-
-if (msg.author.id !== '224605839938289667') return;
-
-    const clean = text => {
-        if (typeof(text) === "string") 
-        
-        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-        else
-            return text;
-      }
-
-      try {
-        const code = args.join(" ");
-        let evaled = eval(code);
-  
-        // if (typeof evaled !== "string")
-        //   evaled = require("util").inspect(evaled);
-  
-const embed = new d.MessageEmbed()
-.setTitle("Evaled")
-.addField('**Input**', "\`\`\`js" + "\n" + code + "\`\`\`", true)
-.addField('**Output**', "\`\`\`" + clean(evaled) + "\`\`\`")
-.addField('**TypeOf**', "\`\`\`" + typeof(evaled) + "\`\`\`", true)
-.setColor(0x7ec0ee)
-msg.channel.send({embed, code: "js"})
-      } catch (err) {
-        msg.channel.send({embed: { description: "__**An error -.-**__\n" + "\`\`\`" + clean(err) + "\`\`\`", color: 0xFF000}});
-      }
-
-
-
-}
-
-exports.help = {
-    name: "eval",
-    description: "Eval a certain piece of code!",
-    usage: "|eval <code>"
-}
-
-exports.conf = {
-    aliases: ['ev']
-}
-
-*/ //my eval if ye want it

@@ -46,9 +46,10 @@ module.exports.run = (client, message, args) => {
     let output = args.join(' ');
     mappings.forEach(replacer => output = output.replace(replacer.regex, replacer.replacement));
     
-  if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)
+ if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK) { 
     message.channel.send(output);
   message.delete()
+ }
 };
 
 exports.conf = {

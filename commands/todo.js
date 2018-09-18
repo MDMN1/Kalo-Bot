@@ -10,9 +10,8 @@ exports.run = async (client, message, args) => {
   
     const embed = new discord.RichEmbed()
     .setTitle('__Todo Item__')
-    .setThumbnail(message.author.displayAvatarURL)
     .setColor('#f37b1b')
-    .setDescription(todo) //u need it ontop
+    .setDescription(todo)
   
    // todoChannel.send(embed).then    // no itll delete the command  ur gonna react to a deleted msg xD
     message.channel.send(embed).then

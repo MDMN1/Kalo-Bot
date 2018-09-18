@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 
 module.exports.run = async (client, message, args) => {
   
-   if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK){
+   if(message.author.id == process.env.RAL || message.author.id == process.env.FREAK)  {
      
         const embed = new Discord.RichEmbed()
         .setTitle('Restarting...')
@@ -21,13 +21,15 @@ module.exports.run = async (client, message, args) => {
 
                     embed.setColor('#FF0000'),
                     embed.setDescription('Poof!')
-                    m.edit(embed)}).then(() => process.abort()) //&& process.exit  
+                    m.edit(embed)}).then
+                    m.delete().then
+                    (() => process.abort()) 
         })
     })
   }
 }
 exports.conf = {
-    aliases: ['kill'],
+    aliases: ['kill', 'restart'],
 };
   
   exports.help = {

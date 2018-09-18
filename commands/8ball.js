@@ -1,21 +1,9 @@
-const Discord = require ('discord.js')
-module.exports.run = (client, message, args) => {
-  
+const Discord = require('discord.js');
+  module.exports.run = async (client, message, args) => {
 
-//   if(!message.content.includes(`?`)) return message.channel.send('Please make sure to end your sentence with a ?').then(message.delete()).then(m=>m.delete(3000));
-// 	let replies = ['Yes', 'No', 'Maybe', 'I can not answer that for you', 'Ask again later'];
-
-// 	let result = replies[Math.floor(Math.random() * replies.length)];
-// 	let question = args.slice(0).join(" ");
-	
-// 	let embed = new Discord.RichEmbed()
-// 		.setColor('0xff69b4')
-// 		.addField("\n\n\n The question was", "`" + question + "`")
-// 		.addField("\n\n\n The answer is", "`" + result + "`")
-// 	message.channel.send(embed);
-//  }
-  
-    let replies = [  'Yes',
+//========================  Start of Variables  =======================//    
+    
+let replies = [  'Yes',
                      'No',
                      'Why are you asking me that?',
                      'Maybe?',
@@ -23,29 +11,52 @@ module.exports.run = (client, message, args) => {
                      'Have you tried google yet?',
                      'umm...lol',
                      'Ask Coolicos',
-                     'Kalo-Bot does not have the answer'];
-    let result = Math.floor((Math.random() * replies.length));
-    let question = args.slice().join(" ");
-
-    if(!args[2]) return message.channel.send('Please ask me a full question').then(message.delete()).then(m=>m.delete(3000));
-    if(!message.content.includes(`?`)) return message.channel.send('Please make sure to end your sentence with a `?`').then(message.delete()).then(m=>m.delete(3000));
+                     'Kalo-Bot does not have the answer'
+                  ];
     
-  let embed = new Discord.RichEmbed()
-        .setTitle('🎱Magic Kalo-Ball🎱')
-        .addField("Question:", question)
-        .addField("Answer:", replies[result])
-        .setThumbnail(client.user.displayAvatarURL)
+  let result = Math.floor((Math.random() * replies.length));
+  let question = args.slice().join(" ");
+//========================  End of Variables  =======================//
+//========================  Start of Embeds  =======================//    
+   
+    const questionError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 01 •')
+          .setDescription('```Please ask me a full question```')
+    
+    const endError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 02 •')
+          .setDescription('```Please end your question with a "?"```')
+    
+    const Magic = new Discord.RichEmbed()
+          .setTitle('🎱Magic Kalo-Ball🎱')
+          .addField("Question:", question)
+          .addField("Answer:", replies[result])
+          .setThumbnail(client.user.displayAvatarURL)
+    
+//========================  End of Embeds  =======================//
+    
+  if  (!args[2]) return message.channel.send
+        (questionError).then
+          (message.delete()).then
+            (msg => msg.delete(5000));
+    
+  if  (!message.content.includes(`?`)) return message.channel.send
+        (endError).then
+          (message.delete()).then
+            (msg => msg.delete(5000));
 
-            message.channel.send(embed);
-            message.delete()
-
+      message.channel.send(Magic);
+      message.delete()
 };
-  exports.conf = {
-  aliases: ['8b']
-  };
 
-  exports.help = {
-  name: '8ball',
-  description: 'Magic 8ball', 
-  usage: `${process.env.PREFIX}8ball <question> ?`
-};
+
+    exports.conf = {
+    aliases: ['8ball','8b']
+}
+    exports.help = {
+    name: '8ball',
+    description: 'Magic 8ball', 
+    usage: `${process.env.PREFIX}8ball <question> ?`
+}

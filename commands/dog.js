@@ -1,4 +1,4 @@
-const Discord = require ("discord.js");
+const Discord = require('discord.js');
 const superagent = require ("superagent");
 const botsettings = process.env
 //oof still i wanna it to look like we are pro coders

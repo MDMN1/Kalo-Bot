@@ -1,22 +1,23 @@
 const Discord = require ('discord.js')
 module.exports.run = (client, message, args) => {
   
- let user = message.guild.member(message.mentions.users.first()) || message.guild.members.author;
-  
-  const embed = new Discord.RichEmbed()
-  .setTitle(`${user}'s information`)
-  .addField('Username','oof')
-  .addField('UserID', 'oof')
-  .addField('Status', 'oof')
-  .addField('Roles','oof')
-  .setColor('#41baea')
-  
-  message.channel.send(embed)
-  message.delete()
+	let user = message.mentions.users.first() || message.guild.members.get(args[1]) || message.author;
 
-  
-  
-};
+		let embed = new Discord.RichEmbed()
+			.setAuthor(`${user.username}'s Information`)
+			.setDescription(`-------------------------------------------------------`)
+			.setThumbnail(user.displayAvatarURL)
+			.addField("Full Username", user.tag, true)
+			.addField("ID:", user.id, true)
+			.addField("Nickname:", message.guild.member(user).nickname ? message.guild.member(user).nickname : "***None***", true)
+			.addField('Status:', user.presence.status, true)
+			.addField("Activity:", message.guild.member(user).presence.game ? message.guild.member(user).presence.game.name : "**No Activity Found**", true)
+			.addField('Current Roles:', message.guild.member(user).roles.map(role => role).join(' | '), true)
+			.addField("Created:", user.createdAt, true)
+			.setTimestamp();
+		message.channel.send(embed)
+		message.delete();
+}
 exports.conf = {
 aliases: ['userinfo', 'uinfo'] //u delete?    no, never added
 };

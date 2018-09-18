@@ -1,90 +1,111 @@
-const Discord = module.require("discord.js");
+const Discord = require('discord.js');
+  module.exports.run = async (client, message, args) => {
+    
+//========================  Start of Variables  =======================// 
 
-module.exports.run = async (client, message, args) => {
+    let  user = message.guild.member(message.mentions.users.first());
+    let  roleName = args[1].slice(3).replace('>', '');  
+    let  role = message.guild.roles.find( r => r.id === `${roleName}`);
+    let  modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
 
-    let user = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    let role = args.join(" ").slice(22);
-    let gRole = message.guild.roles.find('name', role);
-    let modlog = message.guild.channels.find('name', 'moderation-logs');
+//========================  End of Variables  =======================// 
+//========================  Start of Embeds  =======================//
 
-
-    const errEmbed = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
+    const permError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 01 •')
           .setDescription('```You do not have **MANAGE_ROLES** Permissions```')
 
-    const errEmbed2 = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
+    const userError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 02 •')
           .setDescription('```Please mention a user to add a role to```')
   
-     const errEmbed3 = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
-          .setDescription('```Please specify a role```') 
-
-    const errEmbed4 = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
-          .setDescription('```I could not find that role. Make sure you spelled it right```') 
+    const roleError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error : 03 •')
+          .setDescription('```Please specify a role after the mentioned user```')
     
-    const errEmbed5 = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
+    const roleError2 = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error : 04•')
+          .setDescription('```Please specify a VALID role after the mentioned user```') 
+    
+    const levelError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 05•')
           .setDescription('```You cannot add a role to a member with the same or higher role than yourself```') 
     
-    const errEmbed6 = new Discord.RichEmbed()
-      .setColor('#ed455a')
-        .setTitle('`Error`')
-          .setDescription('```Mentioned User already has that role```') 
-  
-  
-      if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
-          (errEmbed).then
+    const failError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 06•')
+          .setDescription('```Mentioned user already has that role```') 
+    
+    const modlogError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 07')
+          .setDescription('```The Channel "moderation-logs" was not found```')
+    
+//========================  End of Embeds  =======================//
+    
+    if  (!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
+          (permError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
+    
+    if  (!user) return message.channel.send
+          (userError).then 
+            (message.delete()).then
+              (msg => msg.delete(5000));
+    
+    if  (!args[1]) return message.channel.send
+          (roleError).then 
             (message.delete()).then
               (msg => msg.delete(5000));
         
-    if  (!user) return message.channel.send
-          (errEmbed2).then 
+    if  (!roleName) return message.channel.send
+          (roleError).then
             (message.delete()).then
-              (msg => msg.delete(3000));
-  
+              (msg => msg.delete(5000));
+    
     if  (!role) return message.channel.send
-          (errEmbed3).then
+          (roleError2).then
             (message.delete()).then
-              (msg => msg.delete(3000));
-  
-    if  (!gRole) return message.channel.send
-          (errEmbed4).then
+              (msg => msg.delete(5000))
+    
+    if  (!modlog) return message.channel.send
+          (`The channel *Moderatu was not found`).then
             (message.delete()).then
-              (msg => msg.delete(3000));
+              (msg => msg.delete(5000))
   
     if  (user.highestRole > message.author.highestRole) return message.channel.send
-          (errEmbed5).then
+          (levelError).then
             (message.delete()).then
-              (msg => msg.delete(3000));
+              (msg => msg.delete(5000));
         
-    if  (user.roles.has(gRole.id)) return message.channel.send
-          (errEmbed6).then
+    if  (user.roles.has(role.id)) return message.channel.send
+          (failError).then
             (message.delete()).then
-              (msg => msg.delete(3000));
+              (msg => msg.delete(5000));
+    
+    await  (user.addRole(role))
+            .catch(err => console.log(err.message)).then
+            message.delete();
   
-          await (user.addRole(gRole));
-                  message.delete();
+        user.send
+        (`Congrats! You have been given the role **${role.name}** on ${message.guild.name}`)
+        .catch(err => console.log(err.message)).then
+        modlog.send
+        (`${user} was given the role **${role}**`)
+};
 
-        try{
-            await user.send(`Congrats! You have been given the role **${role}** on ${message.guild.name}`)
-                }catch(e) {
-                   modlog.send(`${user} was given the role **${gRole}**`).then (msg => msg.delete());
-                }
-    }
 
     exports.conf = {
-        aliases: ['addrole', 'arole']
-      };
+    aliases: ['addrole','arole']
+}
       
-      exports.help = {
-        name: 'addrole',
-        description: 'adds a role to specified user',
-        usage: `${process.env.PREFIX}addrole [role name]`
-      };
+    exports.help = {
+    name: 'addrole',
+    description: 'Adds role to specified user',
+    usage: `${process.env.PREFIX}addrole [role name]`
+}

@@ -1,69 +1,76 @@
 const Discord = module.require("discord.js");
-module.exports.run = async (client, message, args) => {
+  module.exports.run = async (client, message, args) => {
   
-  const reason = args.join(" ").slice(22);
-  const modlog = message.guild.channels.find( n => n.name === 'moderation-logs');
-  let user = message.mentions.users.first() || message.guild.members.get(args[0]);
-  
-  const errEmbed = new Discord.RichEmbed()
+  const permError = new Discord.RichEmbed()
     .setColor('#ed455a')
-      .setTitle('`Error`')
+      .setTitle('• Error: 01 •')
         .setDescription('```You do not have **KICK_MEMBERS** Permissions```')
     
-  const errEmbed2 = new Discord.RichEmbed()
+  const channelError = new Discord.RichEmbed()
     .setColor('#ed455a')
-      .setTitle('`Error`')
-        .setDescription('```I can\'t find the channel #moderation-logs```')
+      .setTitle('• Error: 02 •')
+        .setDescription('```The channel #moderation-logs was not found```')
   
-  const errEmbed3 = new Discord.RichEmbed()
+  const userError = new Discord.RichEmbed()
     .setColor('#ed455a')
-      .setTitle('`Error`')
+      .setTitle('• Error: 03 •')
         .setDescription('```Please mention a user to kick```') 
     
-  const errEmbed4 = new Discord.RichEmbed()
+  const highError = new Discord.RichEmbed()
     .setColor('#ed455a')
-      .setTitle('`Error`')
-        .setDescription('```You cannot kick a user with the same or higher role than yourself```')
+      .setTitle('• Error: 04 •')
+        .setDescription('```You can not kick a user with the same or higher role than yourself```')
   
-  const errEmbed5 = new Discord.RichEmbed()
+  const highError2 = new Discord.RichEmbed()
     .setColor('#ed455a')
-      .setTitle('`Error`')
+      .setTitle('• Error: 05 •')
+        .setDescription('```Please mention a user with a role lower than yourself```')
+  
+  const reasonError = new Discord.RichEmbed()
+    .setColor('#ed455a')
+      .setTitle('• Error: 06 •')
         .setDescription('```You must have a reason to kick a user```')  
   
-    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send
-       (errEmbed).then
-         (message.delete()).then
-           (msg => msg.delete(5000));
+//========================  End of Error Embeds  =======================//
   
-  if (!modlog) return message.channel.send
-       (errEmbed2).then
-         (message.delete()).then
-           (msg => msg.delete(5000));  
- 
-  if (message.mentions.users.size < 1) return message.channel.send
-       (errEmbed3).then
-         (message.delete()).then
-           (msg => msg.delete(5000));
+  if  (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send
+        (permError).then
+          (message.delete()).then
+            (msg => msg.delete(5000));
   
-  if (user.highestRole >= message.author.highestRole) return message.channel.send
-       (errEmbed4).then
-         (message.delete()).then
-           (msg => msg.delete(5000));
+  const modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
+    if (!modlog) return message.channel.send
+         (channelError).then
+           (message.delete()).then
+             (msg => msg.delete(5000));  
   
-  if (!reason) return message.channel.send
-       (errEmbed5).then
-         (message.delete()).then
-           (msg => msg.delete(5000));
+  let user = message.mentions.users.first() || message.guild.members.get(args[0]);
+    if  (!user) return message.channel.send
+          (userError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
   
-   const embed = new Discord.RichEmbed()
-     .setThumbnail(message.author.displayAvatarURL)
-       .setColor('#ed455a')
-         .addField('Staff Member:', message.author.tag, true)
-           .addField('Action:', '`Kicked`', true)
-             .addField('User:', user, true)
-               .addField('Reason:', reason, true)
+  if  (user.highestRole >= message.author.highestRole) return message.channel.send
+        (highError).then
+          (message.delete()).then
+            (msg => msg.delete(5000));
   
-     user.send(`You have been **KICKED** from **${message.guild.name}** for '*${reason}* '`).then
+  const reason = args.join(" ").slice(22);
+    
+  if  (!reason) return message.channel.send
+        (reasonError).then
+          (message.delete()).then
+            (msg => msg.delete(5000));
+  
+    const embed = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setAuthor(message.author.tag, message.author.displayAvatarURL)
+          .addField('Action:', '`Kicked`', true)
+          .addField('__User__', `${user}`, true)
+          .addField(`__${user.tag}'s ID__`, user.id, true)
+          .addField('Reason:', `${reason}`, true)
+  
+    user.send(`You have been **KICKED** from **${message.guild.name}** for '*${reason}* '`).then
       message.guild.member(user).kick(reason).then
         modlog.send(embed)
           message.delete()

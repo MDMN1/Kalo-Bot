@@ -1,3 +1,5 @@
 exports.run = (client, error) => {
-if (error) throw new Error(`Yo we bad at code: ${error}`);
+  
+  if (error) throw new error(`Yo we bad at code: ${error}`);
+  
 }

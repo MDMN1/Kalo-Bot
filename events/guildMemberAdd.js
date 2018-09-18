@@ -1,46 +1,57 @@
 const db = require ('quick.db')
-
+const Discord = require('discord.js')
 exports.run = async (client, member) => {
 
-  let role =  member.guild.roles.find('name', 'Member');
-  // let welcomeChannel = member.guild.channels.find('name', 'welcome');
   let nameg = await db.fetch(`serverSettings_${member.guild.id}`, { target:"welcomeChannel"});
   let welcomeChannel = member.guild.channels.get(nameg);
+  
+  const ruleEmbed = new Discord.RichEmbed()
+        .setTitle('Welcome to Kalopsia MC')
+        .setDescription('Here is a list of general rules to follow\n\n' + 
+`\`\`\`asciidoc
+1. No Disrespect
+2. No Spamming
+3. No Excessive Caps
+4. Stop When Asked To 
+5. Do not argue or talk about in-game punishments
+6. No Advertising
+7. Do not troll
+8. Use channels for their Purpose
+9. No Sharing Person Information of Players or Staff
+10. No NSFW content or Topics
+11. No Politics or Inappropriate Topics
+12. Pictures Need To Be in the right channel  
+13. DDos/Dox threats and threats to hack another user \n\t\twill result in a permanent Ban
+14. English Only Please
+15. Use Common Sense
+\`\`\``)
 
+//========================  Welcome Banner  =======================//
   const { Canvas } = require ('canvas-constructor');
   const { Attachment } = require('discord.js');
   const { get } = require ('snekfetch');
   const { resolve, join } = require("path");
-
   const user = (member.guild.members.get.serverNewMember);
   const name =  member.user.tag.length > 25 ?  member.user.tag.substring(0, 22) + "..." :  member.user.tag;
-  
   const {body} = await get('https://cdn.glitch.com/c4d13276-5b80-4293-88a3-29ef7fdcde4d%2Fwelcomebanner_bevel.png?1531016354304');
   const {body:avatar} = await get(member.user.displayAvatarURL);
-  const image = new Canvas(1000, 300)
   
+  const image = new Canvas(1000, 300)
     .addImage(body, 0, 0, 1000, 300)
-      .setTextFont('30px Arial')
-        .setColor('#FFFFFF')
-          .addText(name, 650, 280)
-          .setTextAlign('center')
-        .addRoundImage(avatar, 685,40,182,182,92)    //x, y, width, height, radius
-      .restore()
+    .setTextFont('30px Arial')
+    .setColor('#FFFFFF')
+    .addText(name, 650, 280)
+    .setTextAlign('center')
+    .addRoundImage(avatar, 685,40,182,182,92)  //  x, y, width, height, radius
+    .restore()
     .toBuffer();
-//Autorole after 5min
-          setTimeout(function(){
-           // member.addRole(role).then(     
-             welcomeChannel.send(new Attachment(Buffer.from(image), 'welcome.png'))//) 
-             
-//      const serverStatus = {
-//     guildID: '343987204147642380',
-//     totalUsersID: '461945850206355479',
-//     memberCountID: '461945634174533652',
-//     botCountID: '461945759479103519'
-//   };
-             
-//     client.channels.get(serverStatus.totalUsersID).setName(`Total Users : ${member.guild.memberCount} `);
-//     client.channels.get(serverStatus.memberCountID).setName(`Member Count : ${member.guild.members.filter(m => !m.user.bot).size}`);
-//     client.channels.get(serverStatus.botCountID).setName(`Bot Count : ${member.guild.members.filter(m => m.user.bot).size}`);
-      }, 5000  //5sec for testing
-  )}
+//========================  End of Welcome Banner  =======================//
+
+          
+  
+          setTimeout(function() {
+             welcomeChannel.send(new Attachment(Buffer.from(image), 'welcome.png'))//sends the welcome img 5min after they join
+            //sends list of rules after 5min
+  }, 300000)  //  5min in ms
+  member.send(ruleEmbed)
+}

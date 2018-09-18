@@ -7,7 +7,7 @@ const Discord = require("discord.js");
       .setColor('#41baea')
       .setDescription(`[Kalo-MC Store](https://kalomc.craftingstore.net/)`)
     message.channel.send(embed)
-    message.delete(5000);    
+    message.delete(3000);    
   };
 
   exports.conf = {

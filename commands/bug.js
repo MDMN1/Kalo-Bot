@@ -1,32 +1,51 @@
-const Discord = module.require("discord.js");
+const Discord = require('discord.js');
+  module.exports.run = async (client, message, args) => {
+    
+//========================  Start of Variables  =======================//
+    
+    let reason = args.join(" ");
+    let modlog = message.guild.channels.find(c => c.name === 'bug-tickets');
+    
+//========================  End of Variables  =======================//
+//========================  Start of Embeds  =======================//
 
-module.exports.run = async (client, message, args) => {
+    const reasonError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 01 •')
+          .setDescription('```No bug was reported```')
+    
+    const modlogError = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setTitle('• Error: 02 •')
+          .setDescription('```The channel #bug-tickets was not found```')
+    
+    const Report = new Discord.RichEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL)
+          .setColor('#41baea')
+          .addField('__Bug Report__', `${reason}`)
+    
+//========================  End of Embeds  =======================//   
+    
+    if  (!reason) return message.reply
+        (reasonError).then
+        (message.delete()).then
+        (msg => msg.delete(5000));
 
-const reason = args.join(" ");
-if(!reason) return message.reply("You must suply a reason for this report").then (message.delete()).then (msg => msg.delete(3000));
+    if  (!modlog) return message.channel.send
+        (modlogError).then
+        (message.delete()).then
+        (msg => msg.delete(5000))
+
+    message.delete();
+    modlog.send(Report);
+};
 
 
-const embed = new Discord.RichEmbed()
-.setThumbnail(message.author.displayAvatarURL)
-.setColor('#41baea')
-.addField('__User__', `${message.author}`)
-.addField('__Action__', 'Bug-Ticket')
-.addField('__Description__', `${reason}`)
-// .addField('User Roles:', message.guild.member(message.author).roles.map(role => role).join(' | '), true)
-
-
-const modlog = message.guild.channels.find(n => n.name === 'bug-tickets');
-if(!modlog) return message.channel.send(`Couldnt find the #bug-tickets channel`)
-
-message.delete();
-modlog.send(embed).then (message.delete());
-}
-exports.conf = {
+    exports.conf = {
     aliases: [],
-  };
-  
-  exports.help = {
+}  
+    exports.help = {
     name: 'bug',
     description: 'Reports any bugs found',
     usage: `${process.env.PREFIX}request [what you want to request]`
-  };
+}
