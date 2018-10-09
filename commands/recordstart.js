@@ -2,9 +2,16 @@ const Discord = require('discord.js')
 const fs = require('fs');
   module.exports.run = async (client, message, args) => {
 
-  function createOutputFile(member) {
-  return fs.createWriteStream(`./recordings/${member.id}.mp4`); //xD
-}
+  function createOutputFile(member, data) {
+  let t = fs.createWriteStream(`./recordings/${member.id}.mp4`); //xD
+    
+    t.write(data, (err) => {
+if (err) throw err.message;
+      
+      console.log("Amen Brother")
+
+    })
+};
 
     let [command, ...channelName] = message.content.split(" ");
     if (!message.guild) {
@@ -27,18 +34,17 @@ const fs = require('fs');
           if (speaking) {
             //message.channel.send(`I'm listening to ${user}`);
             const audioStream = receiver.createPCMStream(user);
-            const outputStream = createOutputFile(user);
-            audioStream.pipe(outputStream).then(console.log);
+            const outputStream = createOutputFile(user, audioStream);
+            audioStream.pipe(outputStream)//.then(console.log);
             outputStream.on("data", console.log);
             audioStream.console.log();
               //message.channel.send(`I'm no longer listening to ${user}`);
 
-          // .catch(console.log);   };
+          // .catch(console.log);   });
           }
-        //}
-             catch(console.log);
-}
-
+      }).catch(console.log);
+    }
+)};
 
 
     exports.conf = {
