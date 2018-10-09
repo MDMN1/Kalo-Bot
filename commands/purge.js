@@ -24,12 +24,14 @@ const Discord = module.require("discord.js");
   
 //========================  End of Error Embeds  =======================//
 
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
-      (permError).then
-        (message.delete()).then
-          (msg => msg.delete(3000));
+  if  (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send
+        (permError).then
+          (message.delete()).then
+            (msg => msg.delete(3000));
     
   const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
+  
+  
     if  (!amount) return message.channel.send
             (amountError).then
               (message.delete()).then

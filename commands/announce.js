@@ -3,7 +3,7 @@ const Discord = require('discord.js');
  
 //========================  Start of Variables  =======================//
     
-    let announcementChannel = message.guild.channels.find(c => c.name === 'announcements')
+    
     let  announcement = args.join(" ");
     
 //========================  End of Variables  =======================// 
@@ -37,7 +37,7 @@ const Discord = require('discord.js');
           (message.delete()).then
             (msg => msg.delete(5000));
     
-
+  let announcementChannel = message.guild.channels.find(c => c.name === 'announcements')
   if  (!announcementChannel) return message.channel.send
         (errEmbed3).then
           (message.delete()).then

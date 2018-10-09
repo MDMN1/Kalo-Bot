@@ -93,13 +93,12 @@ const Discord = require(`discord.js`);
   await message.guild.member(user).addRole(role);
 
     const embed = new Discord.RichEmbed()
-        .setColor('#ed455a')
+         .setColor('#ed455a')
          .setAuthor(message.author.tag, message.author.displayAvatarURL)
-          .addField('Action:', '`Muted`', true)
-        .addField('__User__', `${user}`, true)
-        .addField(`__${user.tag}'s ID__`, user.id, true)
-      .addField('Reason:', `${reason}`, true)
-                .setTimestamp();
+         .addField('Action:', '`Muted`', true)
+         .addField('__User__', `${user}`, true)
+         .addField(`__${user.tag}'s ID__`, user.id, true)
+         .addField('Reason:', `${reason}`, true)
     modlog.send(embed)
     user.send(MuteMessage)
  

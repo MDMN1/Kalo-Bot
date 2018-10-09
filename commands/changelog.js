@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 //========================  Start of Variables  =======================//
     
     let title = args.join(" ").split(" | ");
-    let changelogChannel = message.guild.channels.find(c => c.name === 'ᴄʜᴀɴɢᴇʟᴏɢ')
+    let changelogChannel = client.channels.find(c => c.name === 'ᴄʜᴀɴɢᴇʟᴏɢ')
     
 //========================  End of Variables  =======================//
     

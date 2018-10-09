@@ -41,7 +41,7 @@ const Discord = require('discord.js');
         .setDescription('```You must have a reason to ban a user```')
 
   const  BanMessage = new Discord.RichEmbed()
-        .setDescription('You have been Banned From Kalo-MC Discord')
+        .setDescription(`You have been Banned From ${message.guild.name}`)
         .setImage('https://cdn.glitch.com/c4d13276-5b80-4293-88a3-29ef7fdcde4d%2FTreasure_Ban.gif?1536981792732')
 
 //========================  End of Error Embeds  =======================//

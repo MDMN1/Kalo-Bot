@@ -12,7 +12,7 @@ const Discord = require('discord.js');
     const reasonError = new Discord.RichEmbed()
           .setColor('#ed455a')
           .setTitle('• Error: 01 •')
-          .setDescription('```No bug was reported```')
+          .setDescription('```Nothing was reported```')
     
     const modlogError = new Discord.RichEmbed()
           .setColor('#ed455a')
@@ -22,19 +22,19 @@ const Discord = require('discord.js');
     const Report = new Discord.RichEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL)
           .setColor('#41baea')
-          .addField('__Bug Report__', `${reason}`)
+          .addField('__Reported__', `${reason}`)
     
 //========================  End of Embeds  =======================//   
     
     if  (!reason) return message.reply
-        (reasonError).then
-        (message.delete()).then
-        (msg => msg.delete(5000));
+          (reasonError).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
 
     if  (!modlog) return message.channel.send
-        (modlogError).then
-        (message.delete()).then
-        (msg => msg.delete(5000))
+          (modlogError).then
+            (message.delete()).then
+              (msg => msg.delete(5000))
 
     message.delete();
     modlog.send(Report);
@@ -45,7 +45,7 @@ const Discord = require('discord.js');
     aliases: [],
 }  
     exports.help = {
-    name: 'bug',
-    description: 'Reports any bugs found',
+    name: 'report',
+    description: 'Reports anything found',
     usage: `${process.env.PREFIX}request [what you want to request]`
 }

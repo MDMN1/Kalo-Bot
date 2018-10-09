@@ -114,7 +114,7 @@ const Discord = require('discord.js');
                         voiceChannel: voiceChannel,
                         connection: null,
                         songs: [],
-                        volume: 3,
+                        volume: 5,
                         playing: true
 		                  };
     

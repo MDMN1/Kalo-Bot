@@ -22,9 +22,9 @@ const Discord = require('discord.js');
   db.set(`serverSettings_${message.guild.id}`, args[0].slice(2).replace('>', ''), {target: "leaveChannel" }); //Stop overriding Welcome u nub 
   db.fetch(`serverSettings_${message.guild.id}`, { target: "leaveChannel" }).then(s => console.log(s)) // GG
   
-      let modlog = message.guild.channels.find(c => c.name, 'moderation-logs');
-  
-  await modlog.send
+  let modlog = message.guild.channels.find(c => c.name, 'moderation-logs');
+ // if (!modlog) message.channel.send ('moderation-logs wasnt found, your settings have been saved though')
+      modlog.send
         (successEmbed).then
           (message.delete(3000)).then
             (msg => msg.delete(3000))

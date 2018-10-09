@@ -87,7 +87,7 @@ const Discord = require('discord.js');
             (message.delete()).then
               (msg => msg.delete(5000));
     
-    if  (!message.member.roles.has(clockedinRole.id)) return message.reply
+    if  (!message.member.roles.has(clockedinRole.id)) return message.channel.send
           (clockinError2).then
             (message.delete()).then
               (msg => msg.delete(5000));
@@ -99,11 +99,11 @@ const Discord = require('discord.js');
               (message.delete());
       
     if  (!message.member.roles.has(breakRole.id))
-        (message.member.addRole(breakRole)).then
-        (timeChannel.send(breakEmbed)).then
-        (message.author.send(breakEmbed)
-        .catch(err => console.log(err.message))).then
-        (message.delete())
+          (message.member.addRole(breakRole)).then
+            (timeChannel.send(breakEmbed)).then
+              (message.author.send(breakEmbed)
+              .catch(err => console.log(err.message))).then
+                (message.delete())
 };
 
 

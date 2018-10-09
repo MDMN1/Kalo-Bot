@@ -3,31 +3,12 @@ const client = new Discord.Client();
 const fs = require ('fs')
 const queue = new Map();
 
-  client.commands = new Discord.Collection();
-  client.aliases = new Discord.Collection();
-
-    fs.readdir(`./commands/`, (err, files) => {
-      if (err) console.error(err);
-        let jsfiles = files.filter(f => f.split(".").pop() === "js");
-          if(jsfiles.length <= 0) {
-            console.log("No commands to load!");
-              return};
-                jsfiles.forEach((f, i) => {
-                  let props = require(`../commands/${f}`);
-//                    console.log(`${i+1}: ${f}`);
-                      client.commands.set(props.help.name, props);
-                        props.conf.aliases.forEach(alias => {
-                          client.aliases.set(alias, props.help.name);
-    });
-  });
-});
-
-  exports.run = async (client, message) => {
+ exports.run = async (client, message) => {
 //========================  Ticket System  =======================//
 const db = require('quick.db');
 
   if  (message.author.bot) return;
-  if  (message.channel.type !== 'text') {
+  if  (!message.type === 'text') {
     
     let active = await db.fetch(`support_${message.author.id}`);
     let guild  = client.guilds.get('465615213690093580');

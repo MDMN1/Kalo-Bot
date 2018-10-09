@@ -1,16 +1,7 @@
 const Discord = require('discord.js');
   module.exports.run = async (client, message, args) => {
     
-//========================  Start of Variables  =======================// 
-
-    let  user = message.guild.member(message.mentions.users.first());
-    let  roleName = args[1].slice(3).replace('>', '');  
-    let  role = message.guild.roles.find( r => r.id === `${roleName}`);
-    let  modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
-
-//========================  End of Variables  =======================// 
 //========================  Start of Embeds  =======================//
-
     const permError = new Discord.RichEmbed()
           .setColor('#ed455a')
           .setTitle('• Error: 01 •')
@@ -45,7 +36,6 @@ const Discord = require('discord.js');
           .setColor('#ed455a')
           .setTitle('• Error: 07')
           .setDescription('```The Channel "moderation-logs" was not found```')
-    
 //========================  End of Embeds  =======================//
     
     if  (!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send
@@ -53,6 +43,12 @@ const Discord = require('discord.js');
             (message.delete()).then
               (msg => msg.delete(5000));
     
+    if  (!args[0]) return message.channel.send
+          (userError).then 
+            (message.delete()).then
+              (msg => msg.delete(5000));
+    
+    let  user = message.guild.member(message.mentions.users.first());
     if  (!user) return message.channel.send
           (userError).then 
             (message.delete()).then
@@ -62,17 +58,20 @@ const Discord = require('discord.js');
           (roleError).then 
             (message.delete()).then
               (msg => msg.delete(5000));
-        
+    
+    let  roleName = args[1].slice(3).replace('>', ''); 
     if  (!roleName) return message.channel.send
           (roleError).then
             (message.delete()).then
               (msg => msg.delete(5000));
     
+    let  role = message.guild.roles.find( r => r.id === `${roleName}`);
     if  (!role) return message.channel.send
           (roleError2).then
             (message.delete()).then
               (msg => msg.delete(5000))
     
+    let  modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
     if  (!modlog) return message.channel.send
           (`The channel *Moderatu was not found`).then
             (message.delete()).then
@@ -90,13 +89,13 @@ const Discord = require('discord.js');
     
     await  (user.addRole(role))
             .catch(err => console.log(err.message)).then
-            message.delete();
-  
-        user.send
-        (`Congrats! You have been given the role **${role.name}** on ${message.guild.name}`)
+              (message.delete());
+
+    user.send
+      (`Congrats! You have been given the role **${role.name}** on ${message.guild.name}`)
         .catch(err => console.log(err.message)).then
-        modlog.send
-        (`${user} was given the role **${role}**`)
+    modlog.send
+      (`${user} was given the role **${role}**`)
 };
 
 

@@ -1,46 +1,40 @@
 const Discord = require('discord.js');
   module.exports.run = async (client, message, args) => {
-
-//========================  Start of Variables  =======================//    
     
-let replies = [  'Yes',
-                     'No',
-                     'Why are you asking me that?',
-                     'Maybe?',
-                     'Oof, Ask me again',
-                     'Have you tried google yet?',
-                     'umm...lol',
-                     'Ask Coolicos',
-                     'Kalo-Bot does not have the answer'
-                  ];
-    
-  let result = Math.floor((Math.random() * replies.length));
-  let question = args.slice().join(" ");
-//========================  End of Variables  =======================//
-//========================  Start of Embeds  =======================//    
-   
-    const questionError = new Discord.RichEmbed()
+//========================  Start of Embeds  =======================//
+  const questionError = new Discord.RichEmbed()
           .setColor('#ed455a')
           .setTitle('• Error: 01 •')
           .setDescription('```Please ask me a full question```')
-    
-    const endError = new Discord.RichEmbed()
+  
+  const endError = new Discord.RichEmbed()
           .setColor('#ed455a')
           .setTitle('• Error: 02 •')
           .setDescription('```Please end your question with a "?"```')
+  
+  let question = args.slice().join(" ") || 'None';
+  let replies = [  'Yes',
+                   'No',
+                   'Why are you asking me that?',
+                   'Maybe?',
+                   'Oof, Ask me again',
+                   'Have you tried google yet?',
+                   'umm...lol',
+                   'Ask Coolicos',
+                   'Kalo-Bot does not have the answer'  ];
+  let result = Math.floor((Math.random() * replies.length));
     
-    const Magic = new Discord.RichEmbed()
+  const Magic = new Discord.RichEmbed()
           .setTitle('🎱Magic Kalo-Ball🎱')
           .addField("Question:", question)
           .addField("Answer:", replies[result])
           .setThumbnail(client.user.displayAvatarURL)
-    
 //========================  End of Embeds  =======================//
-    
-  if  (!args[2]) return message.channel.send
+  
+  if  (!args[0]) return message.channel.send
         (questionError).then
           (message.delete()).then
-            (msg => msg.delete(5000));
+            (msg => msg.delete(5000))
     
   if  (!message.content.includes(`?`)) return message.channel.send
         (endError).then

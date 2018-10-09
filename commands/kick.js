@@ -63,12 +63,12 @@ const Discord = module.require("discord.js");
             (msg => msg.delete(5000));
   
     const embed = new Discord.RichEmbed()
-          .setColor('#ed455a')
-          .setAuthor(message.author.tag, message.author.displayAvatarURL)
-          .addField('Action:', '`Kicked`', true)
-          .addField('__User__', `${user}`, true)
-          .addField(`__${user.tag}'s ID__`, user.id, true)
-          .addField('Reason:', `${reason}`, true)
+         .setColor('#ed455a')
+         .setAuthor(message.author.tag, message.author.displayAvatarURL)
+         .addField('Action:', '`Kicked`', true)
+         .addField('__User__', `${user}`, true)
+         .addField(`__${user.tag}'s ID__`, user.id, true)
+         .addField('Reason:', `${reason}`, true)
   
     user.send(`You have been **KICKED** from **${message.guild.name}** for '*${reason}* '`).then
       message.guild.member(user).kick(reason).then

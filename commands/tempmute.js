@@ -127,8 +127,9 @@ module.exports.run = async (client, message, args) => {
     const embed2 = new Discord.RichEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL)
           .setColor('#73e878')
-          .addField('Action:', '`Unmuted`', true)
-          .addField('User:', `${user}`, true)
+          .addField('Action:', '`Un-Muted`', true)
+          .addField('__User__', `${user}`, true)
+          .addField(`__${user.tag}'s ID__`, user.id, true)
           .addField('Duration of Mute:', `${ms(ms(mutetime))}`, true)
           .setTimestamp();
 

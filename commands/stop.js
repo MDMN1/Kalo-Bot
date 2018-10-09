@@ -1,5 +1,5 @@
 const Discord = require('discord.js')  
-  exports.run = (client, message, args, ops) => {
+  exports.run = (client, message, args, queue) => {
 
 //========================  Start of Variables  =======================//
     
@@ -68,13 +68,14 @@ const Discord = require('discord.js')
               (msg => msg.delete(5000));
   
       message.guild.me.voiceChannel.leave()
+      queue.delete()
       message.channel.send(LeftMessage).then
       (message.delete()).then
       (msg => msg.delete(5000));
 }
 
 exports.conf = {
-aliases: ['stop', 'leave']
+aliases: ['stop']
 };
 
 exports.help = {

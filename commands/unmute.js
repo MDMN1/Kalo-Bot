@@ -58,13 +58,12 @@ module.exports.run = async (client, message, args) => {
   
 		await message.guild.member(user).removeRole(role);
 		const embed = new Discord.RichEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL)
-            .setColor('#73e878')
-            .addField('Staff Member:', message.author.tag, true)
-            .addField('Action:', '`UnMuted`', true)
-            .addField('User:', user, true)
-            .addField('Reason:', reason, true)
-            .setTimestamp();
+         .setColor('#73e878')
+         .setAuthor(message.author.tag, message.author.displayAvatarURL)
+         .addField('Action:', '`Un-Muted`', true)
+         .addField('__User__', `${user}`, true)
+         .addField(`__${user.tag}'s ID__`, user.id, true)
+         .addField('Reason:', `${reason}`, true)
             
     modlog.send(embed)
 		message.delete();

@@ -85,12 +85,12 @@ module.exports.run = async (client, message, args) => {
   message.guild.unban(user);
 
     const embed = new Discord.RichEmbed()
-          .setColor('#73e878')
-          .setAuthor(message.author.tag, message.author.displayAvatarURL)
-          .addField('Action:', '`Banned`', true)
-          .addField('__User__', `${user}`, true)
-          .addField(`__${user.tag}'s ID__`, user.id, true)
-          .addField('Reason:', `${reason}`, true)
+         .setColor('#73e878')
+         .setAuthor(message.author.tag, message.author.displayAvatarURL)
+         .addField('Action:', '`Un-Banned`', true)
+         .addField('__User__', `${user}`, true)
+         .addField(`__${user.tag}'s ID__`, user.id, true)
+         .addField('Reason:', `${reason}`, true)
     
     modlog.send(embed)
     message.delete()
