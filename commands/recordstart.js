@@ -3,7 +3,7 @@ const fs = require('fs');
   module.exports.run = async (client, message, args) => {
 
   function createOutputFile(member) {
-  return fs.createWriteStream(`./recordings/test.pcm`); //xD
+  return fs.createWriteStream(`./recordings/${member.id}.mp4`); //xD
 }
 
     let [command, ...channelName] = message.content.split(" ");
@@ -28,17 +28,17 @@ const fs = require('fs');
             //message.channel.send(`I'm listening to ${user}`);
             const audioStream = receiver.createPCMStream(user);
             const outputStream = createOutputFile(user);
-            audioStream.pipe(outputStream).then(console.log `${outputStream}`);
+            audioStream.pipe(outputStream).then(console.log);
             outputStream.on("data", console.log);
-            audioStream.on('end', () => { console.log();
+            audioStream.console.log();
               //message.channel.send(`I'm no longer listening to ${user}`);
 
-            });
+          // .catch(console.log);   };
           }
-        });
-      })
-      .catch(console.log);
+        //}
+             catch(console.log);
 }
+
 
 
     exports.conf = {
