@@ -2,15 +2,9 @@ const Discord = require('discord.js')
 const fs = require('fs');
   module.exports.run = async (client, message, args) => {
 
-  function createOutputFile(member, data) {
-  let t = fs.generateWriteStream(`./recordings/${member.id}.mp4`); //xD
-    
-    t.write(data, (err) => {
-if (err) throw err.message;
-      
-      console.log("Amen Brother")
-
-    })
+  function generateOutputFile(member, data) {
+  let t = fs.createWriteStream(`./recordings/${member.tag}.pcm`, "utf8"); //xD i tink idk We need to find a way to get data
+    t.write(data, (err) => console.error(err));//write or writeFile?
 };
 
     let [command, ...channelName] = message.content.split(" ");
@@ -34,17 +28,18 @@ if (err) throw err.message;
           if (speaking) {
             //message.channel.send(`I'm listening to ${user}`);
             const audioStream = receiver.createPCMStream(user);
-            const outputStream = createOutputFile(user, speaking);
-            audioStream.pipe(outputStream)//.then(console.log);
-            outputStream.on("data", console.log);
+            const outputStream = generateOutputFile(user, );
+            
+        //    outputStream.on("data", console.log);
+          //  audioStream.pipe(outputStream)//.then(console.log);
           //  audioStream.console.log();
               //message.channel.send(`I'm no longer listening to ${user}`);
 
           // .catch(console.log);   });
           }
-      }).catch(console.log);
+      })
     }
-)};
+).catch(console.log);};
 
 
     exports.conf = {
