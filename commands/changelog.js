@@ -1,27 +1,18 @@
 const Discord = require('discord.js');
   exports.run = async (client, message, args) => {
-
-//========================  Start of Variables  =======================//
     
     let title = args.join(" ").split(" | ");
-    let changelogChannel = client.channels.find(c => c.name === 'ᴄʜᴀɴɢᴇʟᴏɢ')
-    
-//========================  End of Variables  =======================//
+    let changelogChannel = client.channels.find(channel => channel.name === 'ᴄʜᴀɴɢᴇʟᴏɢ')
     
     if  (message.author.id == process.env.RAL || message.author.id == process.env.FREAK) {
-      
-    changelogChannel.send
-    (`\`\`\`asciidoc\n= ${title[0]} =\n\nDescription :: ${title[1]}\`\`\``)
-    message.delete()
+          changelogChannel.send
+          (`\`\`\`asciidoc\n= ${title[0]} =\n\nDescription :: ${title[1]}\`\`\``)
+            message.delete()
   }
 };
-  
 
-    exports.conf = {
-    aliases: ['log']
-}         
+    exports.conf = {aliases: []}
     exports.help = {
     name: 'changelog',
     description: 'make a change to the changelog channel',
-    usage: `${process.env.PREFIX}changelog`
-}
+    usage: `${process.env.PREFIX}changelog [Title | stuff that was changed]`}

@@ -34,7 +34,7 @@ const Discord = require("discord.js");
 
 
     exports.conf = {
-    aliases: ['h']
+    aliases: ['h', 'hep']
 }
     exports.help = {
     name: 'help',

@@ -22,9 +22,8 @@ const Discord = require('discord.js');
   db.set(`serverSettings_${message.guild.id}`, { welcomeChannel: args[0].slice(2).replace('>', '')} );
   db.fetch(`serverSettings_${message.guild.id}`, { target: "welcomeChannel" }).then(s => console.log(s))
       
-  let modlog = message.guild.channels.find(c => c.name, 'moderation-logs');
-  await modlog.send
-        (successEmbed).then
+  let modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
+        modlog.send(successEmbed).then
           (message.delete(3000)).then
             (msg => msg.delete(3000))
     return;
@@ -33,7 +32,7 @@ const Discord = require('discord.js');
 
   
 exports.conf = {
-aliases: ['setwc', 'setwelcomechannel']
+aliases: ['setwelcomechannel']
 };
 
 exports.help = {

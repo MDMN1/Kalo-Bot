@@ -8,8 +8,8 @@ const Discord = require('discord.js');
     
     let url = args[0];
     let guild = message.guild.id;
-    let musicText = message.guild.channels.find(t => t.name === 'music-commands');
-    let musicVoice = message.guild.channels.find(c => c.name === '🎶 Music Room');
+    let musicText = message.guild.channels.find(textChannel => textChannel.name === 'music-commands');
+    let musicVoice = message.guild.channels.find(voiceChannel => voiceChannel.name === '🎶 Music Room');
     let voiceChannel = message.member.voiceChannel;
     
     
@@ -87,7 +87,7 @@ const Discord = require('discord.js');
                 return
                 };
           
-	let dispatcher = serverQueue.connection.playStream(ytdl(song.url)).on('end', reason => {
+	let dispatcher = serverQueue.connection.playStream(ytdl(song.url, {audioonly: true }), {passes: 10}).on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason);
 			serverQueue.songs.shift();
@@ -97,6 +97,7 @@ const Discord = require('discord.js');
 		.on('error', error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     serverQueue.textChannel.send(`🎶 Started Playing: **${song.title}**`);
+      
 }
     
   async function handleVideo(video, msg, voiceChannel, playlist = false) {
@@ -133,7 +134,8 @@ const Discord = require('discord.js');
 	  } else {
 		serverQueue.songs.push(song);
 		if (playlist) return undefined;
-		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
+		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`)
+      message.delete();
 	  }
 	  return undefined;
 }
@@ -147,7 +149,8 @@ const Discord = require('discord.js');
 				  let video2 = await youtube.getVideoByID(video.id); 
 				  await handleVideo(video2, message, voiceChannel, true); 
 			  } return message.channel.send
-                 (`✅ Playlist: **${playlist.title}** has been added to the queue!`);      
+                 (`✅ Playlist: **${playlist.title}** has been added to the queue!`)
+      message.delete();      
 		} else {
 			      try {
 				    var video = await youtube.getVideo(url);

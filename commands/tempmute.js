@@ -4,8 +4,8 @@ const ms = require('ms');
 module.exports.run = async (client, message, args) => {
 
       let user = message.mentions.users.first() || message.guild.members.get(args[0]);
-      let modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
-      let role = message.guild.roles.find(r => r.name === "Muted");
+      let modlog = message.guild.channels.find(channel => channel.name === 'moderation-logs');
+      let role = message.guild.roles.find(role => role.name === "Muted");
       let mutetime = args[1];
   
   const errEmbed = new Discord.RichEmbed()
@@ -115,11 +115,7 @@ module.exports.run = async (client, message, args) => {
         .addField('__User__', `${user}`, true)
         .addField(`__${user.tag}'s ID__`, user.id, true)
         .addField('Muted for:', `${ms(ms(mutetime))}`, true)
-
-
-
-
-    .setTimestamp();
+        .setTimestamp();
     await message.guild.member(user).addRole(role);
    user.send(`You have been **Temp-Muted** from **${message.guild.name}** for '*${mutetime}* '`).then
     modlog.send(embed);

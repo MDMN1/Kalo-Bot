@@ -3,8 +3,8 @@ const Discord = require('discord.js')
 
 //========================  Start of Variables  =======================//
     
-    let musicText = message.guild.channels.find(t => t.name === 'music-commands');
-    let musicVoice = message.guild.channels.find(c => c.name === '🎶 Music Room');
+    let musicText = message.guild.channels.find(textChannel => textChannel.name === 'music-commands');
+    let musicVoice = message.guild.channels.find(voiceChannel => voiceChannel.name === '🎶 Music Room');
     let voiceChannel = message.member.voiceChannel;
     
 //========================  End of Variables  =======================//

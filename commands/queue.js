@@ -4,6 +4,16 @@ const Discord = require('discord.js');
 //========================  Start of Variables  =======================//
     
     let fetched = queue.get(message.guild.id)
+    
+    const emptyQueue = new Discord.RichEmbed()
+          .setColor('#ed455a')
+          .setDescription('The queue is empty')
+        
+    if  (!fetched) return message.channel.send
+          (emptyQueue).then
+            (message.delete()).then
+              (msg => msg.delete(5000));
+    
     let queued = fetched.songs
     let nowPlaying = queued[0]
     let resp = `__**Now Playing**__: *${nowPlaying.title}*\n\n`
@@ -13,9 +23,7 @@ const Discord = require('discord.js');
 //========================  Start of Variables  =======================//
 //========================  Start of Variables  =======================//
     
-    const emptyEmbed = new Discord.RichEmbed()
-          .setColor('#ed455a')
-          .setDescription('The queue is empty')
+
     
     const queueEmbed = new Discord.RichEmbed()
           .setColor('#41baea')
@@ -24,13 +32,11 @@ const Discord = require('discord.js');
     
 //========================  Start of Variables  =======================//
     
-    if  (!fetched) return message.channel.send
-          (emptyEmbed).then
-            (message.delete()).then
-              (msg => msg.delete(5000));
 
+    
     queue.delete().then
     message.channel.send(queueEmbed)
+    message.delete()
 };
 
 

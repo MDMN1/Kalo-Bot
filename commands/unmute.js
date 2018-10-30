@@ -3,9 +3,9 @@ const Discord = require(`discord.js`);
 
 module.exports.run = async (client, message, args) => {
     let reason = args.join(" ").slice(22);
-    let modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
+    let modlog = message.guild.channels.find(channel => channel.name === 'moderation-logs');
     let user = message.mentions.users.first() || message.guild.members.get(args[0]);
-    let role = message.guild.roles.find(r => r.name === "Muted");
+    let role = message.guild.roles.find(role => role.name === "Muted");
 
   const errEmbed = new Discord.RichEmbed()
     .setColor('#ed455a')

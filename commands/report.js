@@ -4,20 +4,14 @@ const Discord = require('discord.js');
 //========================  Start of Variables  =======================//
     
     let reason = args.join(" ");
-    let modlog = message.guild.channels.find(c => c.name === 'bug-tickets');
-    
+    let ral = process.env.Ral
 //========================  End of Variables  =======================//
 //========================  Start of Embeds  =======================//
 
     const reasonError = new Discord.RichEmbed()
           .setColor('#ed455a')
           .setTitle('• Error: 01 •')
-          .setDescription('```Nothing was reported```')
-    
-    const modlogError = new Discord.RichEmbed()
-          .setColor('#ed455a')
-          .setTitle('• Error: 02 •')
-          .setDescription('```The channel #bug-tickets was not found```')
+          .setDescription('```Nothing was reported to Kals owner```')
     
     const Report = new Discord.RichEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -31,13 +25,8 @@ const Discord = require('discord.js');
             (message.delete()).then
               (msg => msg.delete(5000));
 
-    if  (!modlog) return message.channel.send
-          (modlogError).then
-            (message.delete()).then
-              (msg => msg.delete(5000))
-
     message.delete();
-    modlog.send(Report);
+    ral.send(Report);
 };
 
 

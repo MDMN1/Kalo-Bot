@@ -44,7 +44,7 @@ module.exports.run = async (client, message, args) => {
           (message.delete()).then
             (msg => msg.delete(5000));
   
-  const modlog = message.guild.channels.find(c => c.name === 'moderation-logs');
+  const modlog = message.guild.channels.find(channel => channel.name === 'moderation-logs');
     if  (!modlog) return message.channel.send
           (modlogError).then
             (message.delete()).then

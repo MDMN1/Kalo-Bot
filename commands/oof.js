@@ -29,7 +29,7 @@ const ytdl = require('ytdl-core');
   };
 
   exports.conf = {
-    aliases: ['oof']
+    aliases: []
   };
 
   exports.help = {

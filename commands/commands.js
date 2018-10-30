@@ -1,53 +1,40 @@
-const Discord = require('discord.js');
+exports.run = (client, message, args, aliases) => {
+  if (!args[0]) {
+    const commandNames = Array.from(client.commands.keys());
+    const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+    message.channel.send('```css'+`\n[Full KaloBot Command List]   »»» For more information on a command use [${process.env.PREFIX}command 'Command Name'] ««« | [REQUIRED] | (OPTIONAL) \t\t\t\t»»» [NOTICE!] Not all commands can be used by members «««
+                                    \n\n${client.commands.map(c => `${process.env.PREFIX}${c.help.name}${' '.repeat(longest - c.help.name.length)}`).join('')}
+                                     \n`+'```').then (message.delete());
+  } else {
+    let command = args[0];
+    if (client.commands.has(command)) {
+      command = client.commands.get(command);
+      message.channel.send('```css'+`\n[Command Name: ${command.help.name}]\n\n[Usage]: ${command.help.usage}\n[Aliases]: ${command.conf.aliases}\n[Description]: ${command.help.description}`+'```').then (message.delete());
+    }           /*Aliases: ${command.help.aliases}\n*/
+  }
 
-  module.exports.run = async (client, message, args) => {
+// new test code
 
-  let pages = ['**All Kalo-Bot Commands**\n\n!8ball\n!ascii\n!botinfo\n!cat', '!commands\n!dog\n!help\n!invite','!ip\n!now\n!oof\n!ping','!rules\n!serverinfo\n!stop\n!store','!userinfo\n!vote\n!kalo','For more information on a command do !help [command name]'];  //array for pages
-  let page = 1;  //default page
-    
-    const embed = new Discord.RichEmbed()
-      .setColor('#41baea')
-      .setFooter(`Page ${page} of ${pages.length}`)
-      .setDescription(pages[page-1])
+// if (args[0].toLowerCase() === "Owner") {
+//     message.channel.send('```css'+`\n[Owner Commands]\n\n${client.commands.BotOwner.map(c => `${botsettings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} » ${c.help.description}`).join('\n')}\n`+'```').then (message.delete());
+// }
 
-    message.channel.send(embed).then(msg => {    //sends embed then adds forward and backward reactions
-      msg.react('⬅').then(r => {
-        msg.react('➡')
+// if (args[0].toLowerCase() === "Moderator") {
+//     message.channel.send('```css'+`\n[Moderator Commands]\n\n${client.commands.Moderator.map(c => `${botsettings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} » ${c.help.description}`).join('\n')}\n`+'```').then (message.delete());
+// }
 
-    const backwardsFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id === message.author.id;    //filters for using reactions    
-    const forwardsFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id === message.author.id;
-    
-    const backwards = msg.createReactionCollector(backwardsFilter, {time: 120000 });
-    const forwards = msg.createReactionCollector(forwardsFilter, {time: 120000 });
-        
-      backwards.on('collect', r => {
-        if(page === 1) return;
-        page--;
-        embed.setDescription(pages[page-1]);
-        embed.setFooter(`Page ${page} of ${pages.length}`);
-        msg.edit(embed)
-        // msg.author.reaction.delete()
-      })
-        
-      forwards.on('collect', r => {
-        if(page === pages.length) return;
-        page++;
-        embed.setDescription(pages[page-1]);
-        embed.setFooter(`Page ${page} of ${pages.length}`);
-        msg.edit(embed)
-        // msg.author.reaction.delete()
-      })
-    })
-  })
-}
+// if (args[0].toLowerCase() === "Member") {
+//     message.channel.send('```css'+`\n[Member Commands]\n\n${client.commands.Member.map(c => `${botsettings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} » ${c.help.description}`).join('\n')}\n`+'```').then (message.delete());
+// }
 
-    exports.conf = {
-      aliases: ['commands', 'command', 'cmd', 'cmds']
-    };
-  
-    exports.help = {
-      name: 'commands',
-      description: 'Display Commands in a list on flippable pages',
-      usage: `${process.env.PREFIX}commands`
-    };
+};
 
+exports.conf = {
+  aliases: ['command', 'cmd', 'cmds']
+};
+
+exports.help = {
+  name: 'commands',
+  description: 'Displays all the available commands for the bot',
+  usage: `${process.env.PREFIX}command (command name)`
+};

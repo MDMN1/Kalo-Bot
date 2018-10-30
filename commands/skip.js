@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
   exports.run = async(client, guild, queue, message, args) => {
     
-    let fetched = queue.get(message.guild.id)
+    let fetched = queue.get(guild.id)
     if  (!fetched) return message.channel.send('No music is playing');
     
     if  (message.member.voiecChannel !== message.guild.me.voiceChannel) return message.channel.send('you arnet in my channel')

@@ -19,25 +19,23 @@ const Discord = require('discord.js');
           (message.delete()).then
             (msg => msg.delete(3000));
   
-  db.set(`serverSettings_${message.guild.id}`, args[0].slice(2).replace('>', ''), {target: "leaveChannel" }); //Stop overriding Welcome u nub 
-  db.fetch(`serverSettings_${message.guild.id}`, { target: "leaveChannel" }).then(s => console.log(s)) // GG
+  db.set(`serverSettings_${message.guild.id}`, args[0].slice(2).replace('>', ''), {target: "leaveChannel" });
+  db.fetch(`serverSettings_${message.guild.id}`, { target: "leaveChannel" }).then(s => console.log(s));
   
-  let modlog = message.guild.channels.find(c => c.name, 'moderation-logs');
- // if (!modlog) message.channel.send ('moderation-logs wasnt found, your settings have been saved though')
+  let modlog = message.guild.channels.find(channel => channel.name === 'moderation-logs');
       modlog.send
         (successEmbed).then
           (message.delete(3000)).then
             (msg => msg.delete(3000))
-    return;
-   }
-  };
-
-exports.conf = { //kk
-aliases: ['setlc', 'setleavechannel']
+  }
 };
 
-exports.help = {
-name: 'setlc',
-description: 'Set the leave channel!', 
-usage: `${process.env.PREFIX}lc <channel name> `
-};
+
+    exports.conf = {
+    aliases: ['setleavechannel']
+}
+    exports.help = {
+    name: 'setlc',
+    description: 'Set the leave channel!', 
+    usage: `${process.env.PREFIX}lc <channel name> `
+}

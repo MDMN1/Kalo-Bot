@@ -3,6 +3,7 @@
     let voiceChannel = message.member.voiceChannel;
 
     message.channel.send('🔇 Recording has been stopped')
+    console.log('🔇 Recording has been stopped')
     voiceChannel.leave()
     message.delete()
 }; 
