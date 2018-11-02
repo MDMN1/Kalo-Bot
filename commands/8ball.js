@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
   module.exports.run = async (client, message, args) => {
-      
+//--------------------  Variables  --------------------//
   let replies = [  'Yes',
                    'No',
                    'Why are you asking me that?',
@@ -13,7 +13,7 @@ const Discord = require('discord.js');
                    'Kalo-Bot does not have the answer'  ];
   let result = Math.floor((Math.random() * replies.length));
   let question = args.join(" ");
-    
+//--------------------  End of Variables  --------------------//
   const questionError = new Discord.RichEmbed()
         .setColor('#ed455a')
         .setTitle('• Error: 01 •')
@@ -42,8 +42,12 @@ const Discord = require('discord.js');
     message.delete()
 };
 
-    exports.conf = {aliases: ['8b']}
+    exports.conf = {
+    aliases: ['8b'],
+    category: 'member'
+}
     exports.help = {
     name: '8ball',
     description: 'Magic 8ball', 
-    usage: `${process.env.PREFIX}8ball [question] [?]`}
+    usage: `${process.env.PREFIX}8ball [question] [?]`
+}

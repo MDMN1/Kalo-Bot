@@ -11,11 +11,11 @@ const mcIP = "play.kalo-mc.com";
           ('Error gathering Server Status...')};
     
   body = JSON.parse(body);
-  var status = `${mcIP} is currently offline ❌`;
+  var status = `**IP** - ${mcIP}\n **Status** - Offline ❌`;
   
-  if  (body.online) {status = `${mcIP} is online ✅\n`;
-  if  (body.players.now) {status += '-----------------------------------' + `\n**Players Online - ${body.players.now}**`}
-      else {status += ' Nobody is playing'}}
+  if  (body.online) {status = `**IP** - ${mcIP}\n **Status** - *Online ✅*`;
+  if  (body.players.now) {status += `\n**Players** - *${body.players.now}*`}
+      else {status += '\n**Players** - *No players are online*'}}
     
   const embed = new Discord.RichEmbed()
         .setTitle('Server Status')

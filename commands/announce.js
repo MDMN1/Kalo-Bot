@@ -43,8 +43,12 @@ const Discord = require('discord.js');
         (msg => msg.delete(43200000));//12hr
 };
 
-    exports.conf = {aliases: ['ann']}
+    exports.conf = {
+    aliases: ['ann'],
+    category: 'staff'
+}
     exports.help = {
     name: 'announce',
     description: 'Makes an announcement to #announcements',
-    usage: `${process.env.PREFIX}announce [announcement]`}
+    usage: `${process.env.PREFIX}announce [announcement]`
+}

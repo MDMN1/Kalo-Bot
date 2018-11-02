@@ -1,7 +1,7 @@
 const Discord = require(`discord.js`);
 const db = require ('quick.db')
   module.exports.run = async (client, message, args) => {
-    if(message.author.id === process.env.RAL || message.author.id === process.env.FREAK) {
+    if(message.author.id === process.env.RAL || message.author.id === process.env.CHRIS) {
 
   
      //   message.channel.send('Test command for testing things')

@@ -10,4 +10,4 @@ by anyone.
 
 ChiefKeef97/Kalo-Bot
 
-_*Made by Ralston & Freak (Kewl kid)*_
+_*Made by Ralston & Chris (Kewl kid)*_

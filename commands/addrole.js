@@ -89,8 +89,12 @@ const Discord = require('discord.js');
   }
 };
 
-    exports.conf = {aliases: ['arole']}
+    exports.conf = {
+    aliases: ['arole'],
+    category: 'staff'
+}
     exports.help = {
     name: 'addrole',
     description: 'Adds role to specified user',
-    usage: `${process.env.PREFIX}addrole [role name]`}
+    usage: `${process.env.PREFIX}addrole [role name]`
+}

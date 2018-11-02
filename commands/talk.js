@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
 
     let text = args.join(' ');
     
- if  (message.author.id == process.env.RAL || message.author.id == process.env.FREAK) { 
+ if  (message.author.id == process.env.RAL || message.author.id == process.env.CHRIS) { 
         message.channel.send(args.join(' '));
           message.delete()
    }

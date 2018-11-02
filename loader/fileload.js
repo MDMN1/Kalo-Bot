@@ -12,6 +12,7 @@ const fs = require ('fs')
                     let props = require(`../${fileDirect}/${f}`);
 //                      console.log(`${i+1}: ${f}`);
                         clientcmd.set(props.help.name, props);
+                        clientcmd.set(props.co
                           props.conf.aliases.forEach(alias => {
                             cmdaliase.set(alias, props.help.name);
       });

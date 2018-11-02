@@ -4,7 +4,7 @@ const Discord = require('discord.js');
     let title = args.join(" ").split(" | ");
     let changelogChannel = client.channels.find(channel => channel.name === 'ᴄʜᴀɴɢᴇʟᴏɢ')
     
-    if  (message.author.id == process.env.RAL || message.author.id == process.env.FREAK) {
+    if  (message.author.id == process.env.RAL || message.author.id == process.env.CHRIS) {
           changelogChannel.send
           (`\`\`\`asciidoc\n= ${title[0]} =\n\nDescription :: ${title[1]}\`\`\``)
             message.delete()

@@ -3,9 +3,9 @@ const client = new Discord.Client();
 const queue = new Map();
   exports.run = async (client, message, guild) => {
     const serverQueue = {}
-//   if (message.guild) {
-//       serverQueue = queue.get(message.guild.id)
-// }
+  if (message.client.guild) {
+      serverQueue = queue.get(message.guild.id)
+}
   let args = message.content.slice(process.env.PREFIX.length).trim().split(' ');
 	let command = args.shift().toLowerCase();
   let cmd;

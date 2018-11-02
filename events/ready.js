@@ -6,7 +6,7 @@ exports.run = (client) => {
   let statuses = [`play.kalo-mc.com`,
                   `${process.env.PREFIX}help`,
                   `Don\'t forget to vote!`,
-                  `👻 Happy Halloween 👻`
+                  `👻 H̸͖͗ͅa̵̛̹̬̼̫̺͋̿̆̋̈́̓͜p̷̢̪͖͙̅̃p̷̯̃̀̈͘y̸̧̬̣͉͍̾̌̈́͆̒̄͘͜͜͜ ̸̧͕̲̪̻̳̠̙̯̱́͂Ḩ̶̡̪̘̤̈́̋͛̇̾̈́̆̎͑̂ą̶̛̘̗͖͎̺͕͚̭̆̓̽̈́͗l̸̳͖̜̱̫̤͚̂́̔̈́͂̕͘l̷̤̘̭͕͕̼͂̏̾͌́̿̈́͘͝ō̷͇̓͌̅͘w̴̛̩͗̐̈́́̑̂̕͝͝e̷̘̺̰͐̆̅̈́͝e̷͖̱̜͗̑̔̈̋͆͛̑̌̕ͅń̸̛̗̪͇̼͊̈́̈̔͌̆ 👻`
                  ]
   
   setInterval(function() {

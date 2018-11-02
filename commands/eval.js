@@ -19,7 +19,7 @@ const hastebin = require('hastebin-gen');
         .addField("**Input**", "```js\n" + code + "```")
         .addField("**Output**", "```js\n" + clean(evaled) + "```")
         
-  if  (message.author.id == process.env.RAL || message.author.id == process.env.FREAK) { 
+  if  (message.author.id == process.env.RAL || message.author.id == process.env.CHRIS) { 
   try { if (typeof evaled !== "string") {
       evaled = require("util").inspect(evaled);
            

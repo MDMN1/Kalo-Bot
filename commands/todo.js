@@ -4,7 +4,7 @@ const discord = require ('discord.js');
 exports.run = async (client, message, args) => { 
   
   message.delete()
-  //let todoChannel = message.guild.channels.find(n => n.name ==='todo')
+  let todoChannel = message.guild.channels.find(n => n.name ==='todo')
   let todo = args.join(' ');
   
   
@@ -13,8 +13,7 @@ exports.run = async (client, message, args) => {
     .setColor('#f37b1b')
     .setDescription(todo)
   
-   // todoChannel.send(embed).then    // no itll delete the command  ur gonna react to a deleted msg xD
-    message.channel.send(embed).then
+   todoChannel.send(embed).then    // no itll delete the command  ur gonna react to a deleted msg xD
      (m => {m.react(`✅`).then
      (() => {
 

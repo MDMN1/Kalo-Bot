@@ -18,6 +18,7 @@ const fs = require('fs')
 const load = require ('./loader/fileload.js')
 const eload = require ('./loader/eload.js')
 
+
   client.commands = new Discord.Collection();
   client.aliases = new Discord.Collection();
 
@@ -29,10 +30,9 @@ eload('events', client)
 //========================  Message Logging for Kalopsia MC  =======================//
 client.on('message', message => {
 
-    
     let kaloServer = client.guilds.find(s => s.name === 'Kalopsia MC')
     let logChannel = message.client.channels.find(n => n.name === 'ᴍᴇꜱꜱᴀɢᴇꜱ')
-    //let imageURL = message.attachments.map(image => image.url)
+    let imageURL = message.attachments.map(image => image.url)
     
   if  (message.author.bot) return;
   if  (message.guild !== kaloServer) return;
@@ -41,7 +41,7 @@ client.on('message', message => {
   const logged = new Discord.RichEmbed()                                                         
         .setAuthor(message.author.tag, message.author.displayAvatarURL)
         .setDescription(`**Channel** - *#${message.channel.name}*\n**Message** - *${message.content}*\n**Time** - *${message.createdAt}* `)
-        //.setImage({url: imageURL})
+        .setImage(imageURL.toString())
         .setTimestamp();
    
      logChannel.send(logged)
